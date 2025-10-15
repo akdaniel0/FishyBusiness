@@ -11,6 +11,8 @@ public class FishTankCraneScript : MonoBehaviour
     float xdist;
     float ydist;
 
+    public bool isGrab;
+    public bool isColliding;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,10 +27,16 @@ public class FishTankCraneScript : MonoBehaviour
         float ypos = transform.GetChild(0).localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
+        // grab when space pressed
+        if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space)) {
+            isGrab = true;
+        }
+
         // enable crane movement when above limit
         if (mousePos.y > 0.5f && Input.GetKey(KeyCode.C)) {
             xdist = -1 * (xpos - mousePos.x);
-            ydist = -1 * (ypos + transform.localPosition.y - mousePos.y);
+            //ydist = -1 * (ypos + transform.localPosition.y - mousePos.y);
+            
         } else {
             xdist = 0;
             ydist = 0;
@@ -36,16 +44,28 @@ public class FishTankCraneScript : MonoBehaviour
         // apply drag to crane velocity
         craneVelocity /= (1f + Time.deltaTime * craneDrag);
 
+        if(isGrab && ypos > xyLimits[2]) {
+            ydist = -0.5f;
+        } else if (ypos < -1f){
+            ydist = 0.5f;
+            isGrab = false;
+        } else {
+            ydist = 0;
+        }
+
         
         // move axes that aren't out of bounds if cursor not at same spot as grabber
         if (Mathf.Abs(xdist) > 0.2 || Mathf.Abs(ydist) > 0.2) {
-            if (xpos <= xyLimits[1] && xpos >= xyLimits[0] && ypos <= xyLimits[3] && ypos >= xyLimits[2]) {
+            if (xpos <= xyLimits[1] && xpos >= xyLimits[0] && ypos <= xyLimits[3] && ypos >= xyLimits[2] && !isColliding) {
                 craneVelocity += new Vector2(xdist, ydist);
             } else {
                 // stop crane if out of bounds
                 craneVelocity = new Vector2(0,0);
             }
+            // reset collision state for next frame
+            isColliding = false;
         }
+        
         
         // if x position out of bounds, correct
         if (xpos > xyLimits[1]) {
