@@ -5,31 +5,41 @@ public class FishTankCraneScript : MonoBehaviour
     public float[] xyLimits; // [ymin, ymax, xmin, xmax], [0.5f, 4f, -9f, 4f]
     public float craneDrag;
     public float craneAcceleration;
+    public float verticalSpeed;
     
     Vector3 mousePos;
     Vector2 craneVelocity;
     float xdist;
     float ydist;
 
-    public bool isGrab;
+    public bool isReaching;
     public bool isColliding;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // Disable VSync to use targetFrameRate
+        QualitySettings.vSyncCount = 0;
+
+        // Set target frame rate to 120 FPS
+        Application.targetFrameRate = 120;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // update line between grabber and center
+        gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(0).transform.position.x, transform.GetChild(0).transform.position.y + 0.6f, 5));
+        gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));
+        
+
         float xpos = transform.localPosition.x;
         float ypos = transform.GetChild(0).localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         // grab when space pressed
-        if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space)) {
-            isGrab = true;
+        if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space) && ypos > -1f) {
+            isReaching = true;
         }
 
         // enable crane movement when above limit
@@ -44,11 +54,11 @@ public class FishTankCraneScript : MonoBehaviour
         // apply drag to crane velocity
         craneVelocity /= (1f + Time.deltaTime * craneDrag);
 
-        if(isGrab && ypos > xyLimits[2]) {
-            ydist = -0.5f;
+        if(isReaching && ypos > xyLimits[2]) {
+            ydist = -0.5f * verticalSpeed;
         } else if (ypos < -1f){
-            ydist = 0.5f;
-            isGrab = false;
+            ydist = 0.5f * verticalSpeed;
+            isReaching = false;
         } else {
             ydist = 0;
         }
