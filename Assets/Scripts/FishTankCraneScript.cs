@@ -46,6 +46,9 @@ public class FishTankCraneScript : MonoBehaviour
                 isReaching = true;
             } else {
                 // drop object
+                if (grabbedObj != null) {
+                    gameObject.GetComponentInChildren<Animator>().Play("ReleaseAnim");
+                }
                 grabbedObj.transform.SetParent(null);
                 grabbedObj = null;
             }

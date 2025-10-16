@@ -28,7 +28,7 @@ public class ConveyorCraneScript : MonoBehaviour
         // update line between grabber and center
         gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(1).transform.position.x, transform.GetChild(1).transform.position.y, 5));
         gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));
-
+        
         float xpos = transform.localPosition.x;
         float ypos = transform.localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
