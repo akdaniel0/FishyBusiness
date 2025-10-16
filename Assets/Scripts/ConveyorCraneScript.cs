@@ -13,6 +13,7 @@ public class ConveyorCraneScript : MonoBehaviour
     float ydist;
     //float rotatio;
     float rotarget;
+    bool isRotating;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -24,14 +25,18 @@ public class ConveyorCraneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // update line between grabber and center
+        gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(1).transform.position.x, transform.GetChild(1).transform.position.y, 5));
+        gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));
+
         float xpos = transform.localPosition.x;
-        float ypos = transform.GetChild(0).localPosition.y;
+        float ypos = transform.localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         // enable crane movement when above limit
         if (mousePos.y < 0.5f && Input.GetKey(KeyCode.C)) {
             xdist = -1 * (xpos - mousePos.x);
-            ydist = -1 * (ypos + transform.localPosition.y - mousePos.y);
+            ydist = -1 * (ypos - mousePos.y);
         } else {
             xdist = 0;
             ydist = 0;
@@ -58,10 +63,24 @@ public class ConveyorCraneScript : MonoBehaviour
         }
 
         // rotate crane center if incorrect
-        if (ydist > 0.5) { // target 180 euler
-            rotarget = 180;
-        } else if (ydist < -0.5) { // target 0 euler
-            rotarget = 0;
+        if (ydist > 0) { // target 180 euler
+            if (rotarget == 0) {
+                isRotating = true;
+                rotarget = 180;
+            }
+        } else if (ydist < 0) { // target 0 euler
+            if (rotarget == 180) {
+                isRotating = true;
+                rotarget = 0;
+            }
+        }
+
+        if (Mathf.Abs((transform.eulerAngles.z % 360f) - rotarget) > 2f) {
+            //if ((transform.eulerAngles.z % 360f) < rotarget) {
+            transform.Rotate(0, 0, 10);
+            //}
+        } else {
+            isRotating = false;
         }
 
         
