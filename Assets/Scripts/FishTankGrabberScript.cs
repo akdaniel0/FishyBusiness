@@ -32,5 +32,10 @@ public class FishTankGrabberScript : MonoBehaviour
             }
         }
         // add fish collision detection here
+        if (collision.gameObject.tag == "Fish") {
+            GetComponentInParent<FishTankCraneScript>().grabbedObj = collision.gameObject;
+            GetComponentInParent<FishTankCraneScript>().isReaching = false;
+            // TODO: animation close grabber
+        }
     }
 }
