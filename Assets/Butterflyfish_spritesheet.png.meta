@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 170d1df9303705a40a89c773f78d6af8
+guid: b6ab935fb3532fa448a397dcb979a96a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6239606219624535566
-    second: Clown FIsh_0
+      213: -6888756438569675735
+    second: New Piskel (1)_0
   - first:
-      213: 7377648585833034559
-    second: Clown FIsh_1
+      213: 9173839873224666002
+    second: New Piskel (1)_1
   - first:
-      213: -7929310630926407712
-    second: Clown FIsh_2
+      213: -745645855993587873
+    second: New Piskel (1)_2
   - first:
-      213: -4506171096576464096
-    second: Clown FIsh_3
+      213: 4123733795721074919
+    second: New Piskel (1)_3
   - first:
-      213: 554180779353768152
-    second: Clown FIsh_4
-  - first:
-      213: -7007494462280642457
-    second: Clown FIsh_5
+      213: -1753449832276896209
+    second: New Piskel (1)_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -52,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -66,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 500
+  spritePixelsToUnits: 12
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -141,13 +138,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Clown FIsh_0
+      name: New Piskel (1)_0
       rect:
         serializedVersion: 2
-        x: 3
-        y: 75
-        width: 23
-        height: 15
+        x: 8
+        y: 72
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,20 +153,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2f926fcb3377869a0800000000000000
-      internalID: -6239606219624535566
+      spriteID: 9249ede64883660a0800000000000000
+      internalID: -6888756438569675735
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clown FIsh_1
+      name: New Piskel (1)_1
       rect:
         serializedVersion: 2
-        x: 36
-        y: 75
-        width: 22
-        height: 15
+        x: 41
+        y: 72
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,20 +175,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f33bd34ec4ca26660800000000000000
-      internalID: 7377648585833034559
+      spriteID: 29beed572c6005f70800000000000000
+      internalID: 9173839873224666002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clown FIsh_2
+      name: New Piskel (1)_2
       rect:
         serializedVersion: 2
-        x: 5
-        y: 43
-        width: 21
-        height: 15
+        x: 10
+        y: 40
+        width: 14
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,20 +197,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0e727e11efd65f190800000000000000
-      internalID: -7929310630926407712
+      spriteID: f5792496b0fe6a5f0800000000000000
+      internalID: -745645855993587873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clown FIsh_3
+      name: New Piskel (1)_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 43
-        width: 19
-        height: 15
+        x: 41
+        y: 40
+        width: 15
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -222,20 +219,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 02b6d6b234dd671c0800000000000000
-      internalID: -4506171096576464096
+      spriteID: 7e85a3ae9027a3930800000000000000
+      internalID: 4123733795721074919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Clown FIsh_4
+      name: New Piskel (1)_4
       rect:
         serializedVersion: 2
-        x: 5
-        y: 11
-        width: 21
-        height: 15
+        x: 8
+        y: 8
+        width: 16
+        height: 16
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -244,30 +241,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8d00bbe8b78d0b700800000000000000
-      internalID: 554180779353768152
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Clown FIsh_5
-      rect:
-        serializedVersion: 2
-        x: 36
-        y: 11
-        width: 22
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 760de32f9e060ce90800000000000000
-      internalID: -7007494462280642457
+      spriteID: f26daafeaae7aa7e0800000000000000
+      internalID: -1753449832276896209
       vertices: []
       indices: 
       edges: []
@@ -284,12 +259,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Clown FIsh_0: -6239606219624535566
-      Clown FIsh_1: 7377648585833034559
-      Clown FIsh_2: -7929310630926407712
-      Clown FIsh_3: -4506171096576464096
-      Clown FIsh_4: 554180779353768152
-      Clown FIsh_5: -7007494462280642457
+      New Piskel (1)_0: -6888756438569675735
+      New Piskel (1)_1: 9173839873224666002
+      New Piskel (1)_2: -745645855993587873
+      New Piskel (1)_3: 4123733795721074919
+      New Piskel (1)_4: -1753449832276896209
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
