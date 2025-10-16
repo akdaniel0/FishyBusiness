@@ -6,6 +6,8 @@ public class FishTankCraneScript : MonoBehaviour
     public float craneDrag;
     public float craneAcceleration;
     public float verticalSpeed;
+
+    public GameObject grabbedObj;
     
     Vector3 mousePos;
     Vector2 craneVelocity;
@@ -37,9 +39,16 @@ public class FishTankCraneScript : MonoBehaviour
         float ypos = transform.GetChild(0).localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
-        // grab when space pressed
+        // action when space pressed
         if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space) && ypos > -1f) {
-            isReaching = true;
+            // grab object if no object grabbed
+            if (grabbedObj == null) {
+                isReaching = true;
+            } else {
+                // drop object
+                grabbedObj.transform.SetParent(null);
+                grabbedObj = null;
+            }
         }
 
         // enable crane movement when above limit
