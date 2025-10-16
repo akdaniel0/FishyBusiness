@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: 5279d84fb1084a445b48288b4e6cfa04
+guid: cd8b15a593850ff4ab6595cae468f8a4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 361153800724473395
-    second: Claw_base_0
+      213: -5099602072439533266
+    second: conveyor5_0
+  - first:
+      213: 7679569109628094764
+    second: conveyor5_1
+  - first:
+      213: -9168441613118112527
+    second: conveyor5_2
+  - first:
+      213: 3951813366121526718
+    second: conveyor5_3
+  - first:
+      213: -7517480332198733854
+    second: conveyor5_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +87,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +138,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Claw_base_0
+      name: conveyor5_1
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 336e671e773130500800000000000000
-      internalID: 361153800724473395
+      spriteID: c290277ca6f439a60800000000000000
+      internalID: 7679569109628094764
       vertices: []
       indices: 
       edges: []
@@ -151,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: bc7795f85668df34496d63dfc6afe971
     internalID: 0
     vertices: []
     indices: 
@@ -159,7 +171,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Claw_base_0: 361153800724473395
+      conveyor5_1: 7679569109628094764
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

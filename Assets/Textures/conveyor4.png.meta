@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 5279d84fb1084a445b48288b4e6cfa04
+guid: 7f991692edbeb344f8370c3c1c418752
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 361153800724473395
-    second: Claw_base_0
+      213: -5869057299307999057
+    second: conveyor4_0
+  - first:
+      213: 7161529497534407956
+    second: conveyor4_1
+  - first:
+      213: 9116466188499901766
+    second: conveyor4_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +43,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +81,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,23 +132,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Claw_base_0
+      name: conveyor4_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 64
+        height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 336e671e773130500800000000000000
-      internalID: 361153800724473395
+      spriteID: fa0555c5b7bec8ea0800000000000000
+      internalID: -5869057299307999057
       vertices: []
       indices: 
       edges: []
@@ -151,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c1555f145604c4f44bf7c47e52e800e9
     internalID: 0
     vertices: []
     indices: 
@@ -159,7 +165,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Claw_base_0: 361153800724473395
+      conveyor4_0: -5869057299307999057
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

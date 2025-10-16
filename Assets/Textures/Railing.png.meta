@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5279d84fb1084a445b48288b4e6cfa04
+guid: b23b874f6cbd086429bafe23ace847d0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 361153800724473395
-    second: Claw_base_0
+      213: 4193726631227913137
+    second: Railing_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Claw_base_0
+      name: Railing_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 1000
+        height: 93
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 336e671e773130500800000000000000
-      internalID: 361153800724473395
+      spriteID: 1b37f6bd62c133a30800000000000000
+      internalID: 4193726631227913137
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Claw_base_0: 361153800724473395
+      Railing_0: 4193726631227913137
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

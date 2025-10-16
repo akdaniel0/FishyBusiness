@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 5279d84fb1084a445b48288b4e6cfa04
+guid: 370555cf5f75f6442b67339b758e9624
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 361153800724473395
-    second: Claw_base_0
+      213: 3184018855556121093
+    second: nigiri_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Claw_base_0
+      name: nigiri_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 128
-        height: 128
+        x: 4
+        y: 21
+        width: 38
+        height: 18
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 336e671e773130500800000000000000
-      internalID: 361153800724473395
+      spriteID: 502819b8748ef2c20800000000000000
+      internalID: 3184018855556121093
       vertices: []
       indices: 
       edges: []
@@ -158,8 +158,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Claw_base_0: 361153800724473395
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
