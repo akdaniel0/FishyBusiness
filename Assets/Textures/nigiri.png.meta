@@ -158,7 +158,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      nigiri_0: 3184018855556121093
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
