@@ -26,7 +26,12 @@ public class FishAiScript : MonoBehaviour
         this.outside = this.origin - new Vector3(2f, 0f);
         int rand = Random.Range(0, 2);
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
-        this.sprite.sprite = this.types[this.type];
+        if(this.type < this.types.Length)
+        {
+            this.sprite.sprite = this.types[this.type];
+        }
+        // Otherwise defaults to placeholder sprite
+
     }
 
     // Update is called once per frame
@@ -120,7 +125,6 @@ public class FishAiScript : MonoBehaviour
     private float checker;
     public Sprite[] types;
     public int type = 0;
-
     public bool isDead;
     float fallSpeed;
 }
