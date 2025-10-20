@@ -32,6 +32,16 @@ public class FishAiScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if grabbed no swim
+        if (transform.parent != null) {
+            isDead = true;
+            return;
+        } else if (isDead) {
+            transform.position = new Vector3(transform.position.x, transform.position.y - fallSpeed * Time.deltaTime, transform.position.z);
+            fallSpeed += 1 * Time.deltaTime;
+            return;
+        }
+
         float speed = this.speed * 0.005f;
         float ymove;
         this.checker += Time.deltaTime;
@@ -110,4 +120,7 @@ public class FishAiScript : MonoBehaviour
     private float checker;
     public Sprite[] types;
     public int type = 0;
+
+    public bool isDead;
+    float fallSpeed;
 }

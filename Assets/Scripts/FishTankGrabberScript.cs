@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class FishTankGrabberScript : MonoBehaviour
 {
+    private Animator animator;
+    FishTankCraneScript craneScript;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        this.animator = GetComponent<Animator>();
+        craneScript = GetComponentInParent<FishTankCraneScript>();
     }
 
     // Update is called once per frame
@@ -19,8 +23,8 @@ public class FishTankGrabberScript : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision) {
         // if colliding with the barrier, bounce off and return up
         if (collision.transform.name == "Barrier") {
-            GetComponentInParent<FishTankCraneScript>().isColliding = true;
-            GetComponentInParent<FishTankCraneScript>().isReaching = false;
+            craneScript.isColliding = true;
+            craneScript.isReaching = false;
             
             // update positions of self and parent with offsets
             transform.position = new Vector3(transform.position.x, transform.position.y + 0.05f, transform.position.z);
@@ -32,10 +36,17 @@ public class FishTankGrabberScript : MonoBehaviour
             }
         }
         // add fish collision detection here
-        if (collision.gameObject.tag == "Fish") {
-            GetComponentInParent<FishTankCraneScript>().grabbedObj = collision.gameObject;
-            GetComponentInParent<FishTankCraneScript>().isReaching = false;
-            // TODO: animation close grabber
+        if (collision.gameObject.tag == "Fish" && craneScript.isReaching) {
+            // animate grab
+            if (craneScript.grabbedObj == null) {
+                this.animator.Play("GrabAnim");
+            }
+            
+            craneScript.grabbedObj = collision.gameObject;
+            craneScript.isReaching = false;
+            collision.transform.SetParent(transform);
+            collision.transform.localPosition = new Vector3(0, -0.5f, 0.2f);
+            
         }
     }
 }
