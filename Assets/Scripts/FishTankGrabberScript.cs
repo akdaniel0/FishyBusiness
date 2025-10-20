@@ -35,7 +35,7 @@ public class FishTankGrabberScript : MonoBehaviour
                 transform.parent.position = new Vector3(transform.parent.position.x - 0.05f, transform.parent.position.y, transform.parent.position.z);
             }
         }
-        // add fish collision detection here
+        // fish collision detection is here
         if (collision.gameObject.tag == "Fish" && craneScript.isReaching) {
             // animate grab
             if (craneScript.grabbedObj == null) {
@@ -45,7 +45,7 @@ public class FishTankGrabberScript : MonoBehaviour
             craneScript.grabbedObj = collision.gameObject;
             craneScript.isReaching = false;
             collision.transform.SetParent(transform);
-            collision.transform.localPosition = new Vector3(0, -0.5f, 0.2f);
+            collision.transform.localPosition = new Vector3(0, -0.4f, 0.2f);
             
         }
     }
