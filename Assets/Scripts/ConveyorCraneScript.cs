@@ -14,6 +14,10 @@ public class ConveyorCraneScript : MonoBehaviour
     //float rotatio;
     float rotarget;
     bool isRotating;
+    float dropTime;
+
+    public bool isReaching;
+    public GameObject grabbedObj;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -25,6 +29,24 @@ public class ConveyorCraneScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // action when space pressed
+        if(mousePos.y < 0.5f && Input.GetKey(KeyCode.Space)) {
+            // grab object if no object grabbed
+            if (grabbedObj == null && Time.time - dropTime > 0.2f) {
+                isReaching = true;
+            } else if (Input.GetKeyDown(KeyCode.Space)) {
+                // drop object
+                if (grabbedObj != null) {
+                    gameObject.GetComponentInChildren<Animator>().Play("ReleaseAnim");
+                }
+                grabbedObj.transform.SetParent(null);
+                grabbedObj = null;
+                dropTime = Time.time;
+            }
+        } else {
+            isReaching = false;
+        }
+
         // update line between grabber and center
         gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(1).transform.position.x, transform.GetChild(1).transform.position.y, 5));
         gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));

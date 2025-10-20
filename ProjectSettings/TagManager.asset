@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Fish
   layers:
   - Default
   - TransparentFX
@@ -38,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: ConveyorLayer
+    uniqueID: 3370138689
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
