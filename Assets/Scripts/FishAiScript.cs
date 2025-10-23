@@ -18,7 +18,7 @@ public class FishAiScript : MonoBehaviour
     void Start()
     {
         this.max = base.transform.position + new Vector3(11.9f, 0f);
-        Debug.Log(this.max);
+        //Debug.Log(this.max);
         this.origin = base.transform.position;
         this.phase = 0;
         this.sprite = base.GetComponent<SpriteRenderer>();
@@ -26,19 +26,32 @@ public class FishAiScript : MonoBehaviour
         this.outside = this.origin - new Vector3(2f, 0f);
         int rand = Random.Range(0, 2);
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
-        this.sprite.sprite = this.types[this.type];
+        if(this.type < this.types.Length)
+        {
+            this.sprite.sprite = this.types[this.type];
+        }
+        // Otherwise defaults to placeholder sprite
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        // revive when water
+        if (isDead && transform.parent == null && transform.position.x < 3f && mousePos.y > 0.5f) {
+            isDead = false;
+        }
+        
         // if grabbed no swim
         if (transform.parent != null) {
             isDead = true;
             return;
         } else if (isDead) {
+            // fall when out of water
             transform.position = new Vector3(transform.position.x, transform.position.y - fallSpeed * Time.deltaTime, transform.position.z);
-            fallSpeed += 1 * Time.deltaTime;
+            fallSpeed += 2 * Time.deltaTime;
             return;
         }
 
@@ -120,7 +133,7 @@ public class FishAiScript : MonoBehaviour
     private float checker;
     public Sprite[] types;
     public int type = 0;
-
     public bool isDead;
     float fallSpeed;
+    Vector3 mousePos;
 }

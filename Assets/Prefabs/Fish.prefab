@@ -105,8 +105,11 @@ MonoBehaviour:
   speed: 3
   debug: 0
   types:
-  - {fileID: -7925117850061670272, guid: 51cd7d9496dbe7c44a5debf954fe3c53, type: 3}
+  - {fileID: -2510476293373519475, guid: f11e3b38508d43b469045b2a11c35277, type: 3}
+  - {fileID: -3493396433182265426, guid: a54e33e4852ca3d4f9c2ff56f34505d4, type: 3}
+  - {fileID: -6888756438569675735, guid: b6ab935fb3532fa448a397dcb979a96a, type: 3}
   type: 0
+  isDead: 0
 --- !u!70 &150841110723247035
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
