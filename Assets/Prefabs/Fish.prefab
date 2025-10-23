@@ -108,6 +108,8 @@ MonoBehaviour:
   - {fileID: -2510476293373519475, guid: f11e3b38508d43b469045b2a11c35277, type: 3}
   - {fileID: -3493396433182265426, guid: a54e33e4852ca3d4f9c2ff56f34505d4, type: 3}
   - {fileID: -6888756438569675735, guid: b6ab935fb3532fa448a397dcb979a96a, type: 3}
+  - {fileID: 323113867243170533, guid: 2f2228eb446a8d54db2bb083a7e0c295, type: 3}
+  - {fileID: -8781757214100938709, guid: b6df869434a1aba428c502f1e5ccbb48, type: 3}
   type: 0
   isDead: 0
 --- !u!70 &150841110723247035
