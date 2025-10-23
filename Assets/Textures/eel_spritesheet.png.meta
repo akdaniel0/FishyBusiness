@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: b6df869434a1aba428c502f1e5ccbb48
+guid: ebb8c8732aeb1f84493ec70f565efc88
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8781757214100938709
-    second: crab_0
+      213: 918859769838199049
+    second: eel_0
   - first:
-      213: 3113750711623011716
-    second: crab_1
+      213: 5897821563474178108
+    second: eel_1
   - first:
-      213: 1677051298726671716
-    second: crab_2
+      213: 4478404091626418483
+    second: eel_2
+  - first:
+      213: 6285018868967011804
+    second: eel_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +135,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: crab_0
+      name: eel_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 42
-        width: 17
-        height: 15
+        x: 2
+        y: 43
+        width: 28
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,20 +150,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b202acd675ee02680800000000000000
-      internalID: -8781757214100938709
+      spriteID: 9016a93a71270cc00800000000000000
+      internalID: 918859769838199049
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_1
+      name: eel_1
       rect:
         serializedVersion: 2
-        x: 37
-        y: 42
-        width: 17
-        height: 14
+        x: 33
+        y: 44
+        width: 29
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 48dc86d56c3463b20800000000000000
-      internalID: 3113750711623011716
+      spriteID: c307487c67549d150800000000000000
+      internalID: 5897821563474178108
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: crab_2
+      name: eel_2
       rect:
         serializedVersion: 2
-        x: 5
-        y: 10
-        width: 17
-        height: 15
+        x: 1
+        y: 12
+        width: 29
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -191,8 +194,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 465f5b25545164710800000000000000
-      internalID: 1677051298726671716
+      spriteID: 3317c023bcc762e30800000000000000
+      internalID: 4478404091626418483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: eel_3
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 12
+        width: 29
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd5f763ac5fd83750800000000000000
+      internalID: 6285018868967011804
       vertices: []
       indices: 
       edges: []
@@ -209,9 +234,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      crab_0: -8781757214100938709
-      crab_1: 3113750711623011716
-      crab_2: 1677051298726671716
+      eel_0: 918859769838199049
+      eel_1: 5897821563474178108
+      eel_2: 4478404091626418483
+      eel_3: 6285018868967011804
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
