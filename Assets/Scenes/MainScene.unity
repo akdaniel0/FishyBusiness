@@ -235,6 +235,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 3750147465076681341, guid: 190a3d3cc9e55714bbd9eb04af3649b9, type: 3}
+  timers: []
+  cooldowns: []
+  types: 
+  queuer: 0
+  queuecool: 0
   tier: 3
 --- !u!4 &439334205
 Transform:
@@ -906,7 +911,7 @@ GameObject:
   - component: {fileID: 836898222}
   - component: {fileID: 836898221}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: SideBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1368,6 +1373,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 3750147465076681341, guid: 190a3d3cc9e55714bbd9eb04af3649b9, type: 3}
+  timers: []
+  cooldowns: []
+  types: 
+  queuer: 0
+  queuecool: 0
   tier: 1
 --- !u!4 &1195462937
 Transform:
@@ -1976,6 +1986,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 3750147465076681341, guid: 190a3d3cc9e55714bbd9eb04af3649b9, type: 3}
+  timers: []
+  cooldowns: []
+  types: 
+  queuer: 0
+  queuecool: 0
   tier: 4
 --- !u!4 &1886007098
 Transform:
@@ -2022,6 +2037,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fish: {fileID: 3750147465076681341, guid: 190a3d3cc9e55714bbd9eb04af3649b9, type: 3}
+  timers: []
+  cooldowns: []
+  types: 
+  queuer: 0
+  queuecool: 0
   tier: 2
 --- !u!4 &1896986944
 Transform:
