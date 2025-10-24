@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: ebb8c8732aeb1f84493ec70f565efc88
+guid: eaf0d8a9da250b144934d2bb9ac5b4a9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 918859769838199049
-    second: eel_0
-  - first:
-      213: 5897821563474178108
-    second: eel_1
-  - first:
-      213: 4478404091626418483
-    second: eel_2
-  - first:
-      213: 6285018868967011804
-    second: eel_3
+      213: 1430441499133708996
+    second: s_buttonDown_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -60,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 24
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -84,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: eel_0
+      name: s_buttonDown_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 43
-        width: 28
-        height: 10
+        x: 0
+        y: 0
+        width: 75
+        height: 14
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,74 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9016a93a71270cc00800000000000000
-      internalID: 918859769838199049
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eel_1
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 44
-        width: 29
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c307487c67549d150800000000000000
-      internalID: 5897821563474178108
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eel_2
-      rect:
-        serializedVersion: 2
-        x: 1
-        y: 12
-        width: 29
-        height: 9
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3317c023bcc762e30800000000000000
-      internalID: 4478404091626418483
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: eel_3
-      rect:
-        serializedVersion: 2
-        x: 33
-        y: 12
-        width: 29
-        height: 8
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd5f763ac5fd83750800000000000000
-      internalID: 6285018868967011804
+      spriteID: 4ca87d3f6f2f9d310800000000000000
+      internalID: 1430441499133708996
       vertices: []
       indices: 
       edges: []
@@ -233,11 +158,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      eel_0: 918859769838199049
-      eel_1: 5897821563474178108
-      eel_2: 4478404091626418483
-      eel_3: 6285018868967011804
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
