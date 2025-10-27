@@ -21,14 +21,14 @@ public class OrderScript : MonoBehaviour
         base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
         if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
         {
-            // SKYE, CHANGE THIS TO MATCH YOUR GAMEOBJECT AND SCRIPT
+            // change moneys
             if(this.quantity > 0)
             {
-                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
+                // GameObject.Find("Manager").GetComponent<ManagerScript>().money -= (this.Worth() * this.quantity);
             }
             else
             {
-                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money += (this.Worth() * this.maxquant);
+                // GameObject.Find("Manager").GetComponent<ManagerScript>().money += (this.Worth() * this.maxquant);
             }
             Destroy(base.gameObject);
         }
