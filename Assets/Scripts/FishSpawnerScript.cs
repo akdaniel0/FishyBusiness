@@ -33,9 +33,9 @@ public class FishSpawnerScript : MonoBehaviour
         switch (this.tier)
         {
             // May be adjusted as needed
-            case 1:
-                com = Random.Range(0, 10);
-                med = Random.Range(0, 5);
+            case 1: // Bottom tier
+                com = Random.Range(0, 5);
+                med = Random.Range(0, 3);
                 break;
             case 2:
                 com = Random.Range(0, 40);

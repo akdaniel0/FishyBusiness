@@ -47,6 +47,7 @@ public class FishAiScript : MonoBehaviour
         // if grabbed no swim
         if (transform.parent != null) {
             isDead = true;
+            fallSpeed = 0;
             return;
         } else if (isDead) {
             // fall when out of water
