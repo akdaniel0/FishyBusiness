@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ManagerScript
+public class GameManagerScript : MonoBehaviour
 {
     public float money;
     public float gameStartTime;
@@ -17,3 +17,4 @@ public class ManagerScript
 
     }
 }
+

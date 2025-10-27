@@ -24,11 +24,11 @@ public class OrderScript : MonoBehaviour
             // change moneys
             if(this.quantity > 0)
             {
-                // GameObject.Find("Manager").GetComponent<ManagerScript>().money -= (this.Worth() * this.quantity);
+                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
             }
             else
             {
-                // GameObject.Find("Manager").GetComponent<ManagerScript>().money += (this.Worth() * this.maxquant);
+                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money += (this.Worth() * this.maxquant);
             }
             Destroy(base.gameObject);
         }
