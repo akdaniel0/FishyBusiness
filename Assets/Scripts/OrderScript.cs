@@ -19,9 +19,11 @@ public class OrderScript : MonoBehaviour
     void Update()
     {
         base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
-        if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
+        //if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
+        // check if passed end without regard for exact y and z position
+        if (transform.position.x > 6)
         {
-            // SKYE, CHANGE THIS TO MATCH YOUR GAMEOBJECT AND SCRIPT
+            // change moneys
             if(this.quantity > 0)
             {
                 // GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
