@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 97e892c9bee920f45876e07ed75d8097
+guid: c6c0b1eda9ee96242a52f9c6f4aceff5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8639445378952046645
-    second: s_buttonUp_0
+      213: -8042476002986003363
+    second: upgrademenu 1_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: s_buttonUp_0
+      name: upgrademenu 1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 75
-        height: 14
+        width: 73
+        height: 200
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bc75c2b93368a1880800000000000000
-      internalID: -8639445378952046645
+      spriteID: d547a67afa2636090800000000000000
+      internalID: -8042476002986003363
       vertices: []
       indices: 
       edges: []
@@ -159,7 +159,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      s_buttonUp_0: -8639445378952046645
+      upgrademenu 1_0: -8042476002986003363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
