@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8117174694241262283}
   - component: {fileID: 751375899744947981}
   - component: {fileID: 150841110723247035}
+  - component: {fileID: -3682610012537853553}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Fish
@@ -105,11 +106,12 @@ MonoBehaviour:
   speed: 3
   debug: 0
   types:
-  - {fileID: -2510476293373519475, guid: f11e3b38508d43b469045b2a11c35277, type: 3}
-  - {fileID: -3493396433182265426, guid: a54e33e4852ca3d4f9c2ff56f34505d4, type: 3}
-  - {fileID: -6888756438569675735, guid: b6ab935fb3532fa448a397dcb979a96a, type: 3}
-  - {fileID: 323113867243170533, guid: 2f2228eb446a8d54db2bb083a7e0c295, type: 3}
-  - {fileID: -8781757214100938709, guid: b6df869434a1aba428c502f1e5ccbb48, type: 3}
+  - {fileID: 9100000, guid: b83747cab9bd7754a90149178eb79d7d, type: 2}
+  - {fileID: 9100000, guid: e8ad8f9482c9b0d429fb1605f8b524ad, type: 2}
+  - {fileID: 9100000, guid: 6a2f4a954bedcc24b8a86cfe2be8cde2, type: 2}
+  - {fileID: 9100000, guid: 92f394e9264a1ae4196d11a04c42415b, type: 2}
+  - {fileID: 9100000, guid: 2b14d5dbded39f54dbc589eb6986fb39, type: 2}
+  - {fileID: 9100000, guid: 063f202e8373daa46bd5cdd758b3b793, type: 2}
   type: 0
   isDead: 0
 --- !u!70 &150841110723247035
@@ -149,3 +151,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.64, y: 0.32}
   m_Direction: 1
+--- !u!95 &-3682610012537853553
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3750147465076681341}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
