@@ -18,7 +18,9 @@ public class OrderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
+        //base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
+        base.transform.position = new Vector3(base.transform.position.x + (moveSpeed * Time.deltaTime), base.transform.position.y, base.transform.position.z);
+        
         //if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
         // check if passed end without regard for exact y and z position
         if (transform.position.x > 6)
@@ -26,11 +28,11 @@ public class OrderScript : MonoBehaviour
             // change moneys
             if(this.quantity > 0)
             {
-                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
+                GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
             }
             else
             {
-                // GameObject.Find("Manager").GetComponent<GameManagerScript>().money += (this.Worth() * this.maxquant);
+                GameObject.Find("Manager").GetComponent<GameManagerScript>().money += (this.Worth() * this.maxquant);
             }
             Destroy(base.gameObject);
         }
@@ -90,12 +92,16 @@ public class OrderScript : MonoBehaviour
                 }
             }    
             Destroy(collision.gameObject);
+        } else if (collision.transform.name == "ConveyorB") {
+            moveSpeed = collision.GetComponent<ConveyorAScript>().conveyorSpeed;
         }
     }
 
     public int fish;
     public Sprite[] sprites;
     public SpriteRenderer display;
+    public float moveSpeed;
+
     private TextMeshPro quantity_text;
     private Vector3 outside;
     private int quantity;

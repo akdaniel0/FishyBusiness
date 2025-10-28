@@ -112,6 +112,7 @@ MonoBehaviour:
   - {fileID: 323113867243170533, guid: 2f2228eb446a8d54db2bb083a7e0c295, type: 3}
   - {fileID: -8781757214100938709, guid: b6df869434a1aba428c502f1e5ccbb48, type: 3}
   display: {fileID: 2646951492634164298}
+  moveSpeed: 0
 --- !u!61 &2363757947715922025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +143,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
