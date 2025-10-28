@@ -26,6 +26,7 @@ public class FishAiScript : MonoBehaviour
         this.outside = this.origin - new Vector3(2f, 0f);
         int rand = Random.Range(0, 2);
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
+        //this.type = 0;
         if(this.type < this.types.Length)
         {
             base.GetComponent<Animator>().runtimeAnimatorController = this.types[this.type];
@@ -36,7 +37,24 @@ public class FishAiScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(isDead && this.type == 0)
+        {
+            this.deathtime += Time.deltaTime;
+            if(this.deathtime >= 0.5f)
+            {
+                Collider2D[] fishes = Physics2D.OverlapCircleAll(base.transform.position, 2f);
+                Debug.Log(fishes.Length);
+                foreach(Collider2D fish in fishes)
+                {
+                    if(fish.CompareTag("Fish"))
+                    {
+                        Destroy(fish.gameObject);
+                    }
+                }
+                Destroy(base.gameObject);
+                return;
+            }
+        }
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // revive when water
@@ -45,9 +63,14 @@ public class FishAiScript : MonoBehaviour
         }
         
         // if grabbed no swim
-        if (transform.parent != null) {
+        if (transform.parent != null) 
+        {
             isDead = true;
             fallSpeed = 0;
+            if(this.type == 0)
+            {
+                base.GetComponent<Animator>().Play("Puffer_die");
+            }
             return;
         } else if (isDead) {
             // fall when out of water
@@ -137,5 +160,5 @@ public class FishAiScript : MonoBehaviour
     public bool isDead;
     float fallSpeed;
     Vector3 mousePos;
-    private int spritenum;
+    private float deathtime;
 }

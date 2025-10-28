@@ -22,7 +22,7 @@ public class FishSpawnerScript : MonoBehaviour
         int type;
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
-        if(Random.Range(0, 100) == 0)
+        if(Random.Range(0, 25) == 0)
         {
             this.timers.Add(0f);
             cooldown = Random.Range(30f, 60f);
