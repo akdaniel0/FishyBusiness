@@ -28,15 +28,15 @@ public class FishAiScript : MonoBehaviour
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
         if(this.type < this.types.Length)
         {
-            this.sprite.sprite = this.types[this.type];
+            base.GetComponent<Animator>().runtimeAnimatorController = this.types[this.type];
         }
         // Otherwise defaults to placeholder sprite
-
     }
 
     // Update is called once per frame
     void Update()
     {
+
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // revive when water
@@ -132,9 +132,10 @@ public class FishAiScript : MonoBehaviour
     private Vector3 outside;
     private Vector3 lap;
     private float checker;
-    public Sprite[] types;
+    public RuntimeAnimatorController[] types;
     public int type = 0;
     public bool isDead;
     float fallSpeed;
     Vector3 mousePos;
+    private int spritenum;
 }
