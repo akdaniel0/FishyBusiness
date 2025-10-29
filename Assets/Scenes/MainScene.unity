@@ -1481,7 +1481,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbedObjs: []
-  conveyorSpeed: 0.3
+  conveyorSpeed: 0.08
 --- !u!61 &809995104
 BoxCollider2D:
   m_ObjectHideFlags: 0
