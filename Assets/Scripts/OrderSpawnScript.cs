@@ -6,16 +6,25 @@ public class OrderSpawnScript : MonoBehaviour
     void Start()
     {
         this.cooldown = 10f;
+        manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
     }
 
 
     void Update()
     {
-        this.timer += Time.deltaTime;
-        if (this.timer >= this.cooldown)
-        {
-            this.GenerateOrder();
-            this.ResetCooldown();
+        // if started, mark running
+        if (manager.gameStartTime != 0) {
+            isRunning = true;
+        }
+
+        // if running, run
+        if (isRunning) {
+            this.timer += Time.deltaTime;
+            if (this.timer >= this.cooldown)
+            {
+                this.GenerateOrder();
+                this.ResetCooldown();
+            }
         }
     }
 
@@ -40,7 +49,7 @@ public class OrderSpawnScript : MonoBehaviour
         {
             newcool = Random.Range(40f, 120f);
         }
-        this.cooldown = newcool;
+        this.cooldown = newcool * cooldownMultiplier;
         this.timer = 0f;
     }    
 
@@ -93,4 +102,8 @@ public class OrderSpawnScript : MonoBehaviour
     public GameObject order;
     private float cooldown;
     private float timer;
+
+    GameManagerScript manager;
+    public bool isRunning;
+    public float cooldownMultiplier;
 }
