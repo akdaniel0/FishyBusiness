@@ -46,7 +46,7 @@ public class FishAiScript : MonoBehaviour
                 Debug.Log(fishes.Length);
                 foreach(Collider2D fish in fishes)
                 {
-                    if(fish.CompareTag("Fish"))
+                    if(fish.CompareTag("Fish") && !fish.GetComponent<FishAiScript>().isDead)
                     {
                         Destroy(fish.gameObject);
                     }
