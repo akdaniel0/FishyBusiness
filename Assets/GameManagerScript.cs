@@ -15,7 +15,7 @@ public class GameManagerScript : MonoBehaviour
     void Update()
     {
         // update display rounded to tenth place
-        gameObject.GetComponent<TMP_Text>().text = ("$" + Mathf.Round(money * 10f) / 10f);
+        gameObject.GetComponent<TextMeshProUGUI>().text = ("$" + Mathf.Round(money * 10f) / 10f);
         
     }
 }
