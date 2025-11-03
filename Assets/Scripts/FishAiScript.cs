@@ -47,9 +47,12 @@ public class FishAiScript : MonoBehaviour
                 Debug.Log(fishes.Length);
                 foreach(Collider2D fish in fishes)
                 {
-                    if(fish.CompareTag("Fish") && !fish.GetComponent<FishAiScript>().isDead)
+                    if(fish.CompareTag("Fish") && !fish.GetComponent<FishAiScript>().isDead && fish.GetComponent<FishAiScript>().type != 0)
                     {
                         Destroy(fish.gameObject);
+                    } else if (fish.CompareTag("Fish") && fish.GetComponent<FishAiScript>().type == 0) { // if other puffer, activate it instead of delete
+                        fish.GetComponent<FishAiScript>().isDead = true;
+                        fish.GetComponent<Animator>().Play("Puffer_die");
                     }
                 }
                 Destroy(base.gameObject);
@@ -59,7 +62,7 @@ public class FishAiScript : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // revive when water
-        if (isDead && transform.parent == null && transform.position.x < 3f && mousePos.y > 0.5f) {
+        if (isDead && transform.parent == null && transform.position.x < 3f && mousePos.y > 0.5f && type != 0) {
             isDead = false;
         }
         
