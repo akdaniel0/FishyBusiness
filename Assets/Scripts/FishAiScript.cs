@@ -37,6 +37,7 @@ public class FishAiScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Time.timeScale == 0f) { return; }
         if(isDead && this.type == 0)
         {
             this.deathtime += Time.deltaTime;
