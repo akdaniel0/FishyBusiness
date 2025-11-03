@@ -37,7 +37,8 @@ public class FishAiScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isDead && this.type == 0) // pufferfish time
+        if(Time.timeScale == 0f) { return; }
+        if(isDead && this.type == 0)
         {
             this.deathtime += Time.deltaTime;
             if(this.deathtime >= 0.5f)
