@@ -25,6 +25,9 @@ public class ConveyorGrabberScript : MonoBehaviour
             // animate grab
             if (craneScript.grabbedObj == null) {
                 this.animator.Play("GrabAnim");
+                collision.transform.SetParent(null);
+                collision.transform.localScale = new Vector3(1f, 1f);
+                collision.transform.SetParent(transform);
             }
 
             // remove obj from conveyor
@@ -35,7 +38,6 @@ public class ConveyorGrabberScript : MonoBehaviour
             
             craneScript.grabbedObj = collision.gameObject;
             craneScript.isReaching = false;
-            collision.transform.SetParent(transform);
             collision.transform.localPosition = new Vector3(0, -0.2f, 0.2f);
         }
     }
