@@ -7,12 +7,16 @@ public class OrderScript : MonoBehaviour
     void Start()
     {
         this.quantity_text = base.GetComponentInChildren<TextMeshPro>();
-        this.display.sprite = this.sprites[this.fish];
+        if(this.fish < this.sprites.Length)
+        {
+            this.display.sprite = this.sprites[this.fish];
+        }
         this.display.color = this.semi;
         this.outside = base.transform.position + new Vector3(15f, 0f);
         this.quantity = Random.Range(1, 6);
         this.maxquant = this.quantity;
         this.UpdateQuant();
+        this.holdpos = base.transform.Find("StackPos").transform.position;
     }
 
     // Update is called once per frame
@@ -86,12 +90,11 @@ public class OrderScript : MonoBehaviour
                         this.display.color = Color.white; // Full opacity
                     }
                 }
-                else
-                {
-                    // TODO: Figure this out
-                }
-            }    
-            Destroy(collision.gameObject);
+            }
+            this.holdquant++;
+            collision.transform.parent = base.transform;
+            collision.transform.position = this.holdpos + new Vector3(0f, 0.053f * (this.holdquant - 1));
+            collision.transform.localScale = new Vector3(0.4f, 0.4f);
         } else if (collision.transform.name == "ConveyorB") {
             moveSpeed = collision.GetComponent<ConveyorAScript>().conveyorSpeed;
         }
@@ -101,10 +104,11 @@ public class OrderScript : MonoBehaviour
     public Sprite[] sprites;
     public SpriteRenderer display;
     public float moveSpeed;
-
+    private Vector3 holdpos;
     private TextMeshPro quantity_text;
     private Vector3 outside;
     private int quantity;
     private int maxquant;
     private Color semi = new Color(1, 1, 1, 0.4f);
+    public int holdquant = 0;
 }
