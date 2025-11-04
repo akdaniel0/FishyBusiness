@@ -13,11 +13,10 @@ public class OrderScript : MonoBehaviour
             this.display.sprite = this.sprites[this.fish];
         }
         this.display.color = this.semi;
-        this.prev_id = -1;
         this.quantity = Random.Range(1, 6);
         this.maxquant = this.quantity;
+        this.holdpos = Vector3.zero;
         this.UpdateQuant();
-        this.holdpos = new Vector3(-0.2079471f, 0.1947018f);
     }
 
     // Update is called once per frame
@@ -57,8 +56,35 @@ public class OrderScript : MonoBehaviour
             this.UpdateQuant();
         }
         this.prev_children = base.transform.childCount;
+
+
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        if(Input.GetMouseButtonDown(1) && !this.done)
+        {
+            if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
+            {
+                if (this.quantity == 0)
+                {
+                    this.moveSpeed *= 5;
+                    this.done = true;
+                }
+            }
+        }
         
     }
+
+
+    /* private void OnMouseOver()
+    {
+        if(Input.GetMouseButtonDown(1) && !this.done)
+        {
+            if (this.quantity == 0)
+            {
+                this.moveSpeed *= 5;
+                this.done = true;
+            }
+        }
+    }*/
 
     private void UpdateQuant()
     {
@@ -72,11 +98,11 @@ public class OrderScript : MonoBehaviour
         }
         if (this.quantity == 0)
         {
-            this.display.color = Color.white; // Full opacity
+            this.display.enabled = false;
         }
         else
         {
-            this.display.color = this.semi;
+            this.display.enabled = true;
         }
     }
 
@@ -106,8 +132,9 @@ public class OrderScript : MonoBehaviour
         {
             collision.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
             collision.transform.parent = base.transform;
-            collision.transform.localPosition = this.holdpos + new Vector3(0f, 0.07f * (this.holdquant - 1));
-            collision.transform.localScale = new Vector3(0.4f, 0.4f);
+            collision.transform.localPosition = this.holdpos + new Vector3(0f, 0.1f * this.holdquant);
+            collision.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
+            collision.GetComponent<SpriteRenderer>().flipX = false;
         } else if (collision.transform.name == "ConveyorB") {
             moveSpeed = collision.GetComponent<ConveyorAScript>().conveyorSpeed;
         }
@@ -136,13 +163,13 @@ public class OrderScript : MonoBehaviour
     public Sprite[] sprites;
     public SpriteRenderer display;
     public float moveSpeed;
-    private Vector3 holdpos;
     private TextMeshPro quantity_text;
     private int quantity;
     private int maxquant;
     private Color semi = new Color(1f, 1f, 1f, 0.4f);
     public int holdquant = 0;
-    private int prev_id;
+    private Vector3 holdpos;
     public List<FishAiScript> fishAis;
     private int prev_children;
+    private bool done;
 }

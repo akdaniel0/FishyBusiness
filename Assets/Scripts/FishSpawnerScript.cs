@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class FishSpawnerScript : MonoBehaviour
 {
@@ -14,59 +15,81 @@ public class FishSpawnerScript : MonoBehaviour
         this.queuecool = Random.Range(30f, 90f);
     }
 
-    private void QueueFish()
+    public static int GetFishType(int tier)
     {
         int com = 0; // Common chance (Fish 1-3)
         int med = 0; // Medium chance (Fish 4-7)
-        float cooldown;
         int type;
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
-        if(Random.Range(0, 25) == 0)
+        if (Random.Range(0, 25) == 0)
         {
-            this.timers.Add(0f);
-            cooldown = Random.Range(30f, 60f);
-            this.cooldowns.Add(cooldown);
-            this.types.Add(0);
-            return;
+            return 0;
         }
-        switch (this.tier)
+        switch (tier)
         {
             // May be adjusted as needed
             case 1: // Bottom tier
-                com = Random.Range(0, 5);
-                med = Random.Range(0, 3);
+                com = Random.Range(0, 3);
+                med = Random.Range(0, 1);
                 break;
             case 2:
-                com = Random.Range(0, 40);
-                med = Random.Range(0, 15);
+                com = Random.Range(0, 20);
+                med = Random.Range(0, 10);
                 break;
             case 3:
-                com = Random.Range(0, 80);
-                med = Random.Range(0, 25);
+                com = Random.Range(0, 40);
+                med = Random.Range(0, 20);
                 break;
             case 4:
-                com = Random.Range(0, 160);
+                com = Random.Range(0, 80);
                 med = Random.Range(0, 40);
                 break;
         }
-        if(com == 0) // not common
+        if (com == 0) // not common
         {
-            if(med == 0) // not medium (gold)
+            if (med == 0) // not medium (gold)
             {
-                cooldown = Random.Range(40f, 60f);
                 type = Random.Range(8, 11);
             }
             else // if medium
             {
-                cooldown = Random.Range(15f, 40f);
                 type = Random.Range(4, 8);
             }
         }
         else // if common
         {
-            cooldown = Random.Range(5f, 20f);
             type = Random.Range(1, 4);
+        }
+        return type;
+    }
+
+    private void QueueFish()
+    {
+        float cooldown;
+        int type;
+        type = GetFishType(this.tier);
+        if(type == 0)
+        {
+            cooldown = Random.Range(30f, 60f);
+        }
+        else if (type >= 4) // not common
+        {
+            if(type >= 8) // not medium (gold)
+            {
+                cooldown = Random.Range(40f, 60f);
+                //type = Random.Range(8, 11);
+            }
+            else // if medium
+            {
+                cooldown = Random.Range(15f, 40f);
+                //type = Random.Range(4, 8);
+            }
+        }
+        else // if common
+        {
+            cooldown = Random.Range(5f, 20f);
+            //type = Random.Range(1, 4);
         }
         this.timers.Add(0f);
         this.cooldowns.Add(cooldown);
