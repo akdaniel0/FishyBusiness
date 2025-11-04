@@ -114,7 +114,7 @@ public class FishTankCraneScript : MonoBehaviour
         transform.GetChild(0).localPosition = new Vector3(transform.GetChild(0).localPosition.x, ypos, transform.GetChild(0).localPosition.z);
 
         // drop animation when grab puffer
-        if (grabbedObj.GetComponent<FishAiScript>().type == 0) {
+        if (grabbedObj != null && grabbedObj.GetComponent<FishAiScript>().type == 0) {
             gameObject.GetComponentInChildren<Animator>().Play("ReleaseAnim");
         }
     

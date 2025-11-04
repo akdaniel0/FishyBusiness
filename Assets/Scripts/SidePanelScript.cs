@@ -27,6 +27,9 @@ public class SidePanelScript : MonoBehaviour
     void doUpgrade1() {
         if (manager.money > upgradeCosts[0]) {
             GameObject.Find("FishTankCraneCenter").GetComponent<FishTankCraneScript>().craneAcceleration *= 1.1f;
+            GameObject.Find("FishTankCraneCenter").GetComponent<FishTankCraneScript>().craneDrag *= 1.05f;
+            GameObject.Find("ConveyorCraneCenter").GetComponent<ConveyorCraneScript>().craneAcceleration *= 1.1f;
+            GameObject.Find("ConveyorCraneCenter").GetComponent<ConveyorCraneScript>().craneDrag *= 1.05f; 
             manager.money -= upgradeCosts[0];
         }
     }
