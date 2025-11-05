@@ -15,35 +15,40 @@ public class FishSpawnerScript : MonoBehaviour
         this.queuecool = Random.Range(30f, 90f);
     }
 
-    public static int GetFishType(int tier)
+    public static int GetFishType(int tier, bool order)
     {
         int com = 0; // Common chance (Fish 1-3)
         int med = 0; // Medium chance (Fish 4-7)
         int type;
+        float mult = 1f;
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
-        if (Random.Range(0, 25) == 0)
+        if (!order && Random.Range(0, 25) == 0)
         {
             return 0;
+        }
+        if(order)
+        {
+            mult = 0.5f;
         }
         switch (tier)
         {
             // May be adjusted as needed
             case 1: // Bottom tier
-                com = Random.Range(0, 3);
-                med = Random.Range(0, 1);
+                com = Random.Range(0, Mathf.RoundToInt(5 * mult));
+                med = Random.Range(0, Mathf.RoundToInt(3 * mult));
                 break;
             case 2:
-                com = Random.Range(0, 20);
-                med = Random.Range(0, 10);
+                com = Random.Range(0, Mathf.RoundToInt(10 * mult));
+                med = Random.Range(0, Mathf.RoundToInt(5 * mult));
                 break;
             case 3:
-                com = Random.Range(0, 40);
-                med = Random.Range(0, 20);
+                com = Random.Range(0, Mathf.RoundToInt(40 * mult));
+                med = Random.Range(0, Mathf.RoundToInt(20 * mult));
                 break;
             case 4:
-                com = Random.Range(0, 80);
-                med = Random.Range(0, 40);
+                com = Random.Range(0, Mathf.RoundToInt(80 * mult));
+                med = Random.Range(0, Mathf.RoundToInt(40 * mult));
                 break;
         }
         if (com == 0) // not common
@@ -68,8 +73,8 @@ public class FishSpawnerScript : MonoBehaviour
     {
         float cooldown;
         int type;
-        type = GetFishType(this.tier);
-        if(type == 0)
+        type = GetFishType(this.tier, false);
+        if(type == 0) // pufferfish
         {
             cooldown = Random.Range(30f, 60f);
         }
@@ -77,7 +82,7 @@ public class FishSpawnerScript : MonoBehaviour
         {
             if(type >= 8) // not medium (gold)
             {
-                cooldown = Random.Range(40f, 60f);
+                cooldown = Random.Range(35f, 60f);
                 //type = Random.Range(8, 11);
             }
             else // if medium
@@ -91,6 +96,13 @@ public class FishSpawnerScript : MonoBehaviour
             cooldown = Random.Range(5f, 20f);
             //type = Random.Range(1, 4);
         }
+        this.timers.Add(0f);
+        this.cooldowns.Add(cooldown);
+        this.types.Add(type);
+    }
+
+    public void QueueFish(int type, float cooldown) // Manual overhaul
+    {
         this.timers.Add(0f);
         this.cooldowns.Add(cooldown);
         this.types.Add(type);
