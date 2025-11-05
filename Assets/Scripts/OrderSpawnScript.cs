@@ -59,7 +59,7 @@ public class OrderSpawnScript : MonoBehaviour
         OrderScript ordscr = order.GetComponent<OrderScript>();
         int type;
         int rand = Random.Range(1, 5);
-        type = FishSpawnerScript.GetFishType(rand);
+        type = FishSpawnerScript.GetFishType(rand, true);
         ordscr.fish = type;
     }
 

@@ -8,37 +8,63 @@ public class OrderScript : MonoBehaviour
     void Start()
     {
         this.quantity_text = base.GetComponentInChildren<TextMeshPro>();
-        if(this.fish < this.sprites.Length)
+        if (this.fish < this.sprites.Length)
         {
             this.display.sprite = this.sprites[this.fish];
         }
         this.display.color = this.semi;
-        this.quantity = Random.Range(1, 6);
+        int max;
+        if (this.fish >= 8)
+        {
+            max = Random.Range(1, 3);
+        }
+        else if (this.fish >= 4)
+        {
+            max = Random.Range(1, 5);
+        }
+        else
+        {
+            max = Random.Range(1, 7);
+        }
+        this.quantity = max;
         this.maxquant = this.quantity;
         this.holdpos = Vector3.zero;
         this.UpdateQuant();
+        this.move_mult = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
         //base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
-        base.transform.position = new Vector3(base.transform.position.x + (moveSpeed * Time.deltaTime), base.transform.position.y, base.transform.position.z);
-        
+        base.transform.position = new Vector3(base.transform.position.x + (moveSpeed * Time.deltaTime * this.move_mult), base.transform.position.y, base.transform.position.z);
+        GameManagerScript manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
         //if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
         // check if passed end without regard for exact y and z position
         if (transform.position.x > 6)
         {
             // change moneys
-            if(this.quantity > 0)
+            if (this.quantity > 0)
             {
-                GameObject.Find("Manager").GetComponent<GameManagerScript>().money -= (this.Worth() * this.quantity);
+                manager.money -= (this.Worth() * this.quantity);
             }
             else
             {
-                GameObject.Find("Manager").GetComponent<GameManagerScript>().money += (this.Worth() * this.maxquant);
+                manager.money += (this.Worth() * this.maxquant);
             }
             Destroy(base.gameObject);
+        }
+        else if (!this.half && base.transform.position.x >= -1.4f && this.fish >= 6)
+        {
+            this.half = true;
+            int rand = Random.Range(0, 3);
+            if(rand == 0)
+            {
+                FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
+                float cool = Random.Range(5f, 20f);
+                Debug.Log("Help spawning...");
+                spawner.QueueFish(this.fish, cool);
+            }
         }
         if (this.prev_children != base.transform.childCount)
         {
@@ -58,19 +84,25 @@ public class OrderScript : MonoBehaviour
         this.prev_children = base.transform.childCount;
 
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if(Input.GetMouseButtonDown(1) && !this.done)
+
+        if (Input.GetMouseButtonDown(1) && !this.done)
         {
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
             if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
             {
                 if (this.quantity == 0)
                 {
-                    this.moveSpeed *= 5;
                     this.done = true;
+                    this.star.SetActive(false);
                 }
             }
         }
-        
+        if (this.done)
+        {
+            this.move_mult *= 1.05f;
+        }
+
     }
 
 
@@ -88,21 +120,24 @@ public class OrderScript : MonoBehaviour
 
     private void UpdateQuant()
     {
-        if (this.quantity > 1)
-        {
-            this.quantity_text.text = this.quantity.ToString();
-        }
-        else
-        {
-            this.quantity_text.text = string.Empty;
-        }
         if (this.quantity == 0)
         {
             this.display.enabled = false;
+            this.star.SetActive(true);
+            this.quantity_text.text = string.Empty;
         }
         else
         {
             this.display.enabled = true;
+            this.star.SetActive(false);
+            if (this.quantity == 1)
+            {
+                this.quantity_text.text = string.Empty;
+            }
+            else
+            {
+                this.quantity_text.text = this.quantity.ToString();
+            }
         }
     }
 
@@ -128,14 +163,16 @@ public class OrderScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.CompareTag("Fish") && collision.transform.parent == null)
+        if (collision.CompareTag("Fish") && collision.transform.parent == null)
         {
             collision.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
             collision.transform.parent = base.transform;
             collision.transform.localPosition = this.holdpos + new Vector3(0f, 0.1f * this.holdquant);
             collision.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
             collision.GetComponent<SpriteRenderer>().flipX = false;
-        } else if (collision.transform.name == "ConveyorB") {
+        }
+        else if (collision.transform.name == "ConveyorB")
+        {
             moveSpeed = collision.GetComponent<ConveyorAScript>().conveyorSpeed;
         }
     }
@@ -172,4 +209,7 @@ public class OrderScript : MonoBehaviour
     public List<FishAiScript> fishAis;
     private int prev_children;
     private bool done;
+    private float move_mult;
+    public GameObject star;
+    private bool half;
 }
