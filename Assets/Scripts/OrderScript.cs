@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class OrderScript : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class OrderScript : MonoBehaviour
         this.holdpos = Vector3.zero;
         this.UpdateQuant();
         this.move_mult = 1f;
+        this.platedisp = GameObject.Find("Canvas_game").GetComponent<RectTransform>().Find("Plate_render").gameObject;
     }
 
     // Update is called once per frame
@@ -58,7 +60,7 @@ public class OrderScript : MonoBehaviour
         {
             this.half = true;
             int rand = Random.Range(0, 3);
-            if(rand == 0)
+            if(rand <= 1)
             {
                 FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
                 float cool = Random.Range(5f, 20f);
@@ -85,11 +87,12 @@ public class OrderScript : MonoBehaviour
 
 
 
-        if (Input.GetMouseButtonDown(1) && !this.done)
+        
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
+        if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
         {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
-            if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
+            if (Input.GetMouseButtonDown(1) && !this.done)
             {
                 if (this.quantity == 0)
                 {
@@ -97,6 +100,15 @@ public class OrderScript : MonoBehaviour
                     this.star.SetActive(false);
                 }
             }
+            //if (!this.platedisp.activeSelf)
+            {
+                this.platedisp.SetActive(true);
+                this.ShowPlate();
+            }
+        }
+        else if(Mathf.Abs(base.transform.position.y - mousePos.y) > 0.5f && this.platedisp.activeSelf)
+        {
+            this.platedisp.SetActive(false);
         }
         if (this.done)
         {
@@ -105,6 +117,11 @@ public class OrderScript : MonoBehaviour
 
     }
 
+    private void ShowPlate()
+    {
+        this.platedisp.transform.Find("Display").GetComponent<Image>().sprite = this.sprites[this.fish];
+        this.platedisp.transform.Find("Quant").GetComponent<TextMeshProUGUI>().text = this.quantity.ToString();
+    }
 
     /* private void OnMouseOver()
     {
@@ -212,4 +229,5 @@ public class OrderScript : MonoBehaviour
     private float move_mult;
     public GameObject star;
     private bool half;
+    private GameObject platedisp;
 }

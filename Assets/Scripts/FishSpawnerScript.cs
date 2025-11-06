@@ -17,10 +17,12 @@ public class FishSpawnerScript : MonoBehaviour
 
     public static int GetFishType(int tier, bool order)
     {
-        int com = 0; // Common chance (Fish 1-3)
-        int med = 0; // Medium chance (Fish 4-7)
+        //int com = 0; // Common chance (Fish 1-3)
+        //int med = 0; // Medium chance (Fish 4-7)
+        float odds = 0f;
         int type;
         float mult = 1f;
+        float max = 0f;
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
         if (!order && Random.Range(0, 25) == 0)
@@ -29,8 +31,10 @@ public class FishSpawnerScript : MonoBehaviour
         }
         if(order)
         {
-            mult = 0.5f;
+            mult = 0.8f;
         }
+        #region Old
+        /*
         switch (tier)
         {
             // May be adjusted as needed
@@ -61,6 +65,38 @@ public class FishSpawnerScript : MonoBehaviour
             {
                 type = Random.Range(4, 8);
             }
+        }
+        else // if common
+        {
+            type = Random.Range(1, 4);
+        }
+        */
+        #endregion
+        switch (tier)
+        {
+            // May be adjusted as needed
+            case 1: // Bottom tier
+                max = 5f;
+                break;
+            case 2:
+                max = 10f;
+                break;
+            case 3:
+                max = 40f;
+                break;
+            case 4:
+                max = 80f;
+                break;
+        }
+        odds = Random.Range(0f, max);
+        odds *= mult;
+        if (odds <= max / 10f) // gold
+        {
+            type = Random.Range(8, 11);
+        }
+        else if(odds <= max / 2.5f) // if medium
+        {
+            type = Random.Range(4, 8);
         }
         else // if common
         {
