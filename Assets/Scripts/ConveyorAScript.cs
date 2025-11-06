@@ -5,18 +5,20 @@ public class ConveyorAScript : MonoBehaviour
     public GameObject[] grabbedObjs;
 
     public float conveyorSpeed;
+    public Animator C_animation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         grabbedObjs = new GameObject[0];
+        C_animation.speed = conveyorSpeed * 1.95f;
     }
 
     // Update is called once per frame
     void Update()
     {
         for (int i = 0; i < grabbedObjs.Length; i++) {
-            grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
+            grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (-conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
         }
     }
     // detect collisions
