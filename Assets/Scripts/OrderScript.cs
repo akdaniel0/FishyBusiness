@@ -60,7 +60,7 @@ public class OrderScript : MonoBehaviour
         {
             this.half = true;
             int rand = Random.Range(0, 3);
-            if(rand == 0)
+            if(rand <= 1)
             {
                 FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
                 float cool = Random.Range(5f, 20f);
