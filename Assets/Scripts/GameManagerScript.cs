@@ -10,12 +10,13 @@ public class GameManagerScript : MonoBehaviour
 
     public float profitIndicatorOpacity; // default 0, reset to 255 on profit earned
     public float fadeSpeed; // opacity change rate
-    // TODO: child object/component for profitIndicator text here
+    TextMeshProUGUI profitIndicator;
 
     void Start()
     {
         //sidepanel = GameObject.Find("Canvas").GetComponent<SidePanelScript>();
         // define child object/component for profitIndicator
+        profitIndicator = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -32,7 +33,23 @@ public class GameManagerScript : MonoBehaviour
         while (profitIndicatorOpacity > 0) {
             profitIndicatorOpacity -= Time.deltaTime * fadeSpeed;
         }
+
+        // update opacity
+        //profitIndicator.color = new Color32(profitIndicator.color.r, profitIndicator.color.g, profitIndicator.color.b, profitIndicatorOpacity);
         
     }
+
+    // method for adding profit instead of changing variable, which will set profitIndicator's opacity to 255 and correct it's color
+    public void AddMoney(float moneyAdded) {
+        money += moneyAdded;
+        profitIndicatorOpacity = 255;
+        
+        if (moneyAdded >= 0) { // green (positive)
+            //profitIndicator.color = new Color32(0, 255, 0, (byte)profitIndicatorOpacity); // fix typecast
+        } else { // red
+            //profitIndicator.color = new Color32(255, 0, 0, (byte)profitIndicatorOpacity); // fix typecast
+        }
+    }
+
 }
 

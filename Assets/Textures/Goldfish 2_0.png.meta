@@ -358,7 +358,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Goldfish 2_0_0: 4182291776415479046
+      Goldfish 2_0_1: 7339884494927283665
+      Goldfish 2_0_2: -3111705983571629517
+      Goldfish 2_0_3: -4966016268632974906
+      Goldfish 2_0_4: -8393193648076067104
+      Goldfish 2_0_5: -8441292554800567436
+      Goldfish 2_0_6: 8612344050673908457
+      Goldfish 2_0_7: 6861091600298742771
+      Goldfish 2_0_8: 1886649023166373099
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
