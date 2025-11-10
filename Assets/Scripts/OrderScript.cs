@@ -48,11 +48,11 @@ public class OrderScript : MonoBehaviour
             // change moneys
             if (this.quantity > 0)
             {
-                manager.money -= (this.Worth() * this.quantity);
+                manager.AddMoney(-1f * (this.Worth() * this.quantity));
             }
             else
             {
-                manager.money += (this.Worth() * this.maxquant);
+                manager.AddMoney((this.Worth() * this.maxquant));
             }
             Destroy(base.gameObject);
         }

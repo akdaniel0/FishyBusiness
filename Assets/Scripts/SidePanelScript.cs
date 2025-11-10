@@ -49,7 +49,7 @@ public class SidePanelScript : MonoBehaviour
     void doUpgrade1() {
         if (manager.money >= upgradeCosts[2]) {
             GameObject.Find("ConveyorA").GetComponent<ConveyorAScript>().conveyorSpeed *= 0.9f;
-            manager.money -= upgradeCosts[2];
+            manager.AddMoney(-1f * upgradeCosts[2]);
         }
     }
     
@@ -57,7 +57,7 @@ public class SidePanelScript : MonoBehaviour
     void doUpgrade2() {
         if (manager.money >= upgradeCosts[1]) {
             GameObject.Find("FishTankCraneCenter").GetComponent<FishTankCraneScript>().verticalSpeed *= 1.25f;
-            manager.money -= upgradeCosts[1];
+            manager.AddMoney(-1f * upgradeCosts[1]);
         }
     }
     
@@ -68,7 +68,7 @@ public class SidePanelScript : MonoBehaviour
             GameObject.Find("FishTankCraneCenter").GetComponent<FishTankCraneScript>().craneDrag *= 1.05f;
             GameObject.Find("ConveyorCraneCenter").GetComponent<ConveyorCraneScript>().craneAcceleration *= 1.1f;
             GameObject.Find("ConveyorCraneCenter").GetComponent<ConveyorCraneScript>().craneDrag *= 1.05f; 
-            manager.money -= upgradeCosts[0];
+            manager.AddMoney(-1f * upgradeCosts[0]);
         }
     }
 }

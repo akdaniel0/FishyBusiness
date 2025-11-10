@@ -5,6 +5,9 @@ public class GameManagerScript : MonoBehaviour
 {
     public float money;
     public float gameStartTime;
+
+    float profitIndicatorGreen;
+    float profitIndicatorRed;
     //public SidePanelScript sidepanel;
     
 
@@ -22,6 +25,11 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // debug test
+        if (Input.GetKeyDown(KeyCode.K)) {
+            AddMoney(5);
+        }
+
         // update display rounded to tenth place
         gameObject.GetComponent<TextMeshProUGUI>().text = ("$" + Mathf.Round(money * 10f) / 10f);
 
@@ -30,24 +38,28 @@ public class GameManagerScript : MonoBehaviour
             profitIndicatorOpacity = 0;
         }
         // fade out indicator by decreasing opacity by fadeSpeed
-        while (profitIndicatorOpacity > 0) {
+        if (profitIndicatorOpacity > 0) {
             profitIndicatorOpacity -= Time.deltaTime * fadeSpeed;
         }
 
         // update opacity
-        //profitIndicator.color = new Color32(profitIndicator.color.r, profitIndicator.color.g, profitIndicator.color.b, profitIndicatorOpacity);
-        
+        profitIndicator.color = new Color32((byte)profitIndicatorRed, (byte)profitIndicatorGreen, (byte)profitIndicator.color.b, (byte)profitIndicatorOpacity);
     }
 
     // method for adding profit instead of changing variable, which will set profitIndicator's opacity to 255 and correct it's color
     public void AddMoney(float moneyAdded) {
         money += moneyAdded;
+        profitIndicator.text = ("" + moneyAdded);
         profitIndicatorOpacity = 255;
         
         if (moneyAdded >= 0) { // green (positive)
-            //profitIndicator.color = new Color32(0, 255, 0, (byte)profitIndicatorOpacity); // fix typecast
+            profitIndicator.color = new Color32(0, 255, 0, 255);
+            profitIndicatorGreen = 255;
+            profitIndicatorRed = 0;
         } else { // red
-            //profitIndicator.color = new Color32(255, 0, 0, (byte)profitIndicatorOpacity); // fix typecast
+            profitIndicator.color = new Color32(255, 0, 0, 255);
+            profitIndicatorRed = 255;
+            profitIndicatorGreen = 0;
         }
     }
 
