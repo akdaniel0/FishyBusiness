@@ -40,7 +40,7 @@ public class FishTankCraneScript : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         
         // action when space pressed
-        if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space) && ypos > -1f) {
+        if(mousePos.y > 0.5f && Input.GetKeyDown(KeyCode.Space) && ypos > -1f && !GameObject.Find("Water").GetComponent<ScrubScript>().on) {
             // grab object if no object grabbed
             if (grabbedObj == null) {
                 isReaching = true;
@@ -53,6 +53,8 @@ public class FishTankCraneScript : MonoBehaviour
                 grabbedObj = null;
             }
         }
+
+        if (GameObject.Find("Water").GetComponent<ScrubScript>().on) { return; }
 
         // enable crane movement when above limit
         if (mousePos.y > 0.5f && Input.GetKey(KeyCode.C)) {

@@ -25,6 +25,7 @@ public class FishAiScript : MonoBehaviour
         this.lap = this.origin + new Vector3(1f, 0f);
         this.outside = this.origin - new Vector3(2f, 0f);
         int rand = Random.Range(0, 2);
+        GameObject.Find("Water").GetComponent<ScrubScript>().grime++;
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
         //this.type = 0;
         if(this.type < this.types.Length)
@@ -125,6 +126,7 @@ public class FishAiScript : MonoBehaviour
                     this.phase = 1;
                 }
                 this.sprite.flipX = true;
+                GameObject.Find("Water").GetComponent<ScrubScript>().grime += Random.Range(0f, 5f);
             }
         }
         if (phase == 1)

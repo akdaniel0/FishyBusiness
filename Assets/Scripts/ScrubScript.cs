@@ -1,0 +1,81 @@
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+
+public class ScrubScript : MonoBehaviour
+{
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        this.water = base.GetComponent<SpriteRenderer>();
+        this.start = this.scrub.color;
+        this.bluwater = this.water.color; // new Color(63f, 107f, 145f, 66f);
+        Debug.Log(this.bluwater);
+        this.dirt = new Color(206f, 255f, 0f, 240f) / 255f;
+        this.diff = this.dirt - this.bluwater;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        float percent = this.grime / 500f;
+        this.water.color = this.bluwater + (this.diff * percent);
+        if(this.on)
+        {
+            if (this.check)
+            {
+                this.mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                this.check = false;
+            }
+            else
+            {
+                this.prev = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                this.check = true;
+            }
+            if((this.mousePos.x >= -9f && this.mousePos.x <= 3f) && (this.mousePos.y <= 3.6f && this.mousePos.y >= 0.6f))
+            {
+                this.CheckMouse();
+            }
+        }
+    }
+
+    private void CheckMouse()
+    {
+        float diff = (Mathf.Abs(prev.x - mousePos.x) + Mathf.Abs(prev.y - mousePos.y)) * 0.25f;
+        this.grime -= diff;
+        if(this.grime < 0f)
+        {
+            this.grime = 0f;
+        }    
+    }
+
+    public void Toggle()
+    {
+        this.on = !this.on;
+        if (this.on)
+        {
+            Cursor.SetCursor(this.curspic, Vector2.zero, CursorMode.Auto);
+            this.scrub.color = Color.red;
+            this.scrub.GetComponentInChildren<TextMeshProUGUI>().text = "Scrub: ON";
+        }
+        else
+        {
+            Cursor.SetCursor(null, Vector2.zero, CursorMode.Auto);
+            this.scrub.color = this.start;
+            this.scrub.GetComponentInChildren<TextMeshProUGUI>().text = "Scrub: OFF";
+        }
+        
+    }
+    public bool on;
+    public Texture2D curspic;
+    private Color start;
+    private Color bluwater;
+    private Color dirt;
+    private SpriteRenderer water;
+    public Image scrub;
+    public float grime;
+    private Color diff;
+    private Vector3 mousePos;
+    private Vector3 prev;
+    private bool check;
+}
