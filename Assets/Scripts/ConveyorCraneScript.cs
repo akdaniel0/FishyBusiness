@@ -30,7 +30,7 @@ public class ConveyorCraneScript : MonoBehaviour
     void Update()
     {
         // action when space pressed
-        if(mousePos.y < 0.5f && Input.GetKey(KeyCode.Space)) {
+        if(mousePos.y < 0.5f && Input.GetKey(KeyCode.Space) && !GameObject.Find("Water").GetComponent<ScrubScript>().on) {
             // grab object if no object grabbed
             if (grabbedObj == null && Time.time - dropTime > 0.2f) {
                 isReaching = true;
@@ -50,7 +50,9 @@ public class ConveyorCraneScript : MonoBehaviour
         // update line between grabber and center
         gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(1).transform.position.x, transform.GetChild(1).transform.position.y, 5));
         gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));
-        
+
+        if (GameObject.Find("Water").GetComponent<ScrubScript>().on) { return; }
+
         float xpos = transform.localPosition.x;
         float ypos = transform.localPosition.y;
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
