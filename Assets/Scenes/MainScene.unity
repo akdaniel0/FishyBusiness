@@ -3050,7 +3050,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabbedObjs: []
-  conveyorSpeed: 0.08
+  conveyorSpeed: -0.08
   C_animation: {fileID: 766769947}
 --- !u!61 &809995104
 BoxCollider2D:

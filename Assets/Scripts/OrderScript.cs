@@ -39,7 +39,7 @@ public class OrderScript : MonoBehaviour
     void Update()
     {
         //base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
-        base.transform.position = new Vector3(base.transform.position.x + (moveSpeed * Time.deltaTime * this.move_mult), base.transform.position.y, base.transform.position.z);
+        base.transform.position = new Vector3(base.transform.position.x - (moveSpeed * Time.deltaTime * this.move_mult), base.transform.position.y, base.transform.position.z);
         GameManagerScript manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
         //if (Vector3.Distance(base.transform.position, this.outside) <= 0.01f)
         // check if passed end without regard for exact y and z position

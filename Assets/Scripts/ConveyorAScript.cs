@@ -11,7 +11,7 @@ public class ConveyorAScript : MonoBehaviour
     void Start()
     {
         grabbedObjs = new GameObject[0];
-        C_animation.speed = conveyorSpeed * 1.95f;
+        C_animation.speed = Mathf.Abs(conveyorSpeed) * 1.95f;
     }
 
     // Update is called once per frame
@@ -20,6 +20,9 @@ public class ConveyorAScript : MonoBehaviour
         for (int i = 0; i < grabbedObjs.Length; i++) {
             grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (-conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
         }
+
+        // move conveyor visual
+        
     }
     // detect collisions
     void OnTriggerStay2D(Collider2D collision) {
