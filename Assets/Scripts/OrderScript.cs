@@ -21,11 +21,11 @@ public class OrderScript : MonoBehaviour
         }
         else if (this.fish >= 4)
         {
-            max = Random.Range(1, 5);
+            max = Random.Range(1, 4);
         }
         else
         {
-            max = Random.Range(1, 7);
+            max = Random.Range(1, 4);
         }
         this.quantity = max;
         this.maxquant = this.quantity;
