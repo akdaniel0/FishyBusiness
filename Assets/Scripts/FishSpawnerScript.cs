@@ -19,14 +19,17 @@ public class FishSpawnerScript : MonoBehaviour
     {
         //int com = 0; // Common chance (Fish 1-3)
         //int med = 0; // Medium chance (Fish 4-7)
-        float odds = 0f;
+        float odds;
         int type;
         float mult = 1f;
         float max = 0f;
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
-        if (!order && Random.Range(0, 25) == 0)
+        float puffer = 1f / ((1f - GameObject.Find("Water").GetComponent<ScrubScript>().percent) * 8.5f + 1.05f); // (10% - 97%)
+        Debug.Log(Mathf.Ceil(puffer * 100f) + "%");
+        if (!order && Random.Range(0f, 1f) <= puffer)
         {
+            Debug.Log("Pufferfish spawning with " + Mathf.Ceil(puffer * 100f) + "% chance!");
             return 0;
         }
         if(order)

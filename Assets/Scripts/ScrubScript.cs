@@ -10,16 +10,17 @@ public class ScrubScript : MonoBehaviour
         this.water = base.GetComponent<SpriteRenderer>();
         this.start = this.scrub.color;
         this.bluwater = this.water.color; // new Color(63f, 107f, 145f, 66f);
-        Debug.Log(this.bluwater);
-        this.dirt = new Color(206f, 255f, 0f, 240f) / 255f;
+        //Debug.Log(this.bluwater);
+        this.dirt = new Color(206f, 255f, 0f, 250f) / 255f;
         this.diff = this.dirt - this.bluwater;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float percent = this.grime / 500f;
-        this.water.color = this.bluwater + (this.diff * percent);
+        this.grime = Mathf.Clamp(this.grime, 0f, 500f);
+        this.percent = this.grime / 500f;
+        this.water.color = this.bluwater + (this.diff * this.percent);
         if(this.on)
         {
             if (this.check)
@@ -43,10 +44,6 @@ public class ScrubScript : MonoBehaviour
     {
         float diff = (Mathf.Abs(prev.x - mousePos.x) + Mathf.Abs(prev.y - mousePos.y)) * 0.25f;
         this.grime -= diff;
-        if(this.grime < 0f)
-        {
-            this.grime = 0f;
-        }    
     }
 
     public void Toggle()
@@ -78,4 +75,5 @@ public class ScrubScript : MonoBehaviour
     private Vector3 mousePos;
     private Vector3 prev;
     private bool check;
+    public float percent;
 }

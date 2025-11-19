@@ -19,14 +19,14 @@ public class OrderScript : MonoBehaviour
         {
             max = Random.Range(1, 3);
         }
-        else if (this.fish >= 4)
-        {
-            max = Random.Range(1, 4);
-        }
         else
         {
             max = Random.Range(1, 4);
         }
+        /*else
+        {
+            max = Random.Range(1, 4);
+        }*/
         this.quantity = max;
         this.maxquant = this.quantity;
         this.holdpos = Vector3.zero;
