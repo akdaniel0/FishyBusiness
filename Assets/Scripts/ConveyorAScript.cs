@@ -16,7 +16,7 @@ public class ConveyorAScript : MonoBehaviour
         C_animation.speed = Mathf.Abs(conveyorSpeed) * 1.95f;
         
         if (hasArrowChild) {
-            arrowVisual = transform.GetChild(0);
+            arrowVisual = transform.GetChild(0).gameObject;
         }
     }
 
