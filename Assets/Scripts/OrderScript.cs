@@ -33,6 +33,7 @@ public class OrderScript : MonoBehaviour
         this.UpdateQuant();
         this.move_mult = 1f;
         this.platedisp = GameObject.Find("Canvas_game").transform.Find("Plate_render").gameObject;
+        this.scrub = GameObject.Find("Water").GetComponent<ScrubScript>();
     }
 
     // Update is called once per frame
@@ -48,7 +49,7 @@ public class OrderScript : MonoBehaviour
             // change moneys
             if (this.quantity > 0)
             {
-                manager.AddMoney(-1f * (this.Worth() * this.quantity));
+                manager.AddMoney(-0.5f * (this.Worth() * this.quantity));
             }
             else
             {
@@ -56,16 +57,20 @@ public class OrderScript : MonoBehaviour
             }
             Destroy(base.gameObject);
         }
-        else if (!this.half && base.transform.position.x >= -1.4f && this.fish >= 6)
+        else if (!this.half && base.transform.position.x >= -1.4f)
         {
             this.half = true;
             int rand = Random.Range(0, 3);
             if(rand <= 1)
             {
-                FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
-                float cool = Random.Range(5f, 20f);
-                Debug.Log("Help spawning...");
-                spawner.QueueFish(this.fish, cool);
+                rand = Random.Range(1, 4);
+                for (int i = 0; i < rand; i++)
+                {
+                    FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
+                    float cool = Random.Range(5f, 20f);
+                    spawner.QueueFish(this.fish, cool);
+                }
+                Debug.Log(rand + "x Fish Help Spawning...");
             }
         }
         if (this.prev_children != base.transform.childCount)
@@ -86,10 +91,8 @@ public class OrderScript : MonoBehaviour
         this.prev_children = base.transform.childCount;
 
 
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
-        if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
+        if (!this.scrub.on && ScrubScript.isHovering(base.transform))
         {
             if (Input.GetMouseButtonDown(1) && !this.done)
             {
@@ -99,31 +102,68 @@ public class OrderScript : MonoBehaviour
                     this.star.SetActive(false);
                 }
             }
-            if (!this.highlight.activeSelf)
+            if (!this.highlight.activeSelf && this.selected <= 1)
             {
                 this.platedisp.SetActive(true);
-                OrderScript[] other = GameObject.FindObjectsByType<OrderScript>(FindObjectsSortMode.None); 
-                foreach(OrderScript order in other)
+                OrderScript[] other = FindObjectsByType<OrderScript>(FindObjectsSortMode.None);
+                this.selected = 0;
+                if(other.Length == 1)
                 {
-                    if(order.gameObject != base.gameObject)
+                    this.ShowPlate();
+                    this.highlight.SetActive(true);
+                    this.selected = 1;
+                }
+                else
+                {
+                    foreach (OrderScript order in other)
                     {
-                        order.transform.Find("Highlight").gameObject.SetActive(false);
+                        if (order.gameObject != base.gameObject)
+                        {
+                            GameObject hl = order.transform.Find("Highlight").gameObject;
+                            if (ScrubScript.isHovering(order.transform))
+                            {
+                                // Both plates are highlighted
+                                this.selected++;
+                                if (this.platedisp.transform.Find("Qty").GetComponent<TextMeshProUGUI>().text != this.quantity.ToString())
+                                {
+                                    if (!hl.activeSelf)
+                                    {
+                                        hl.SetActive(true);
+                                        this.highlight.SetActive(false);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                hl.SetActive(false);
+                                if (!this.highlight.activeSelf)
+                                {
+                                    this.ShowPlate();
+                                    this.selected = 1;
+                                    this.highlight.SetActive(true);
+                                }
+                            }
+                        }
                     }
                 }
-                this.highlight.SetActive(true);
-                this.ShowPlate();
             }
         }
-        else if(Mathf.Abs(base.transform.position.y - mousePos.y) > 0.5f && this.platedisp.activeSelf)
+        else if(this.highlight.activeSelf)
         {
-            this.platedisp.SetActive(false);
+            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //if(Mathf.Abs(base.transform.position.y - mousePos.y) > 0.5f)
+            this.selected--;
+            if (this.selected == 0)
+            {
+                this.platedisp.SetActive(false);
+            }
             this.highlight.SetActive(false);
         }
+
         if (this.done)
         {
             this.move_mult *= 1.05f;
         }
-
     }
 
     private void ShowPlate()
@@ -171,7 +211,7 @@ public class OrderScript : MonoBehaviour
     {
         if (this.fish >= 9)
         {
-            return 20;
+            return 25;
         }
         else if (this.fish >= 6)
         {
@@ -227,7 +267,7 @@ public class OrderScript : MonoBehaviour
     public SpriteRenderer display;
     public float moveSpeed;
     private TextMeshPro quantity_text;
-    private int quantity;
+    public int quantity;
     private int maxquant;
     private Color semi = new Color(1f, 1f, 1f, 0.4f);
     public int holdquant = 0;
@@ -240,4 +280,6 @@ public class OrderScript : MonoBehaviour
     private bool half;
     private GameObject platedisp;
     public GameObject highlight;
+    private ScrubScript scrub;
+    private int selected;
 }
