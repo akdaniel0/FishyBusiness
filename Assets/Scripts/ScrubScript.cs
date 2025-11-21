@@ -50,6 +50,11 @@ public class ScrubScript : MonoBehaviour
         return left && right && up && down;
     }
 
+    public static bool inBounds(Transform obj)
+    {
+        return obj.position.x > -10f && obj.position.x < 6f;
+    }
+
     private void CheckMouse()
     {
         float diff = (Mathf.Abs(prev.x - mousePos.x) + Mathf.Abs(prev.y - mousePos.y)) * 0.25f;

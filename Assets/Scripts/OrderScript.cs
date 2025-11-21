@@ -39,6 +39,20 @@ public class OrderScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!this.free)
+        {
+            this.free = true; // Placeholder
+            Collider2D[] plateoverlap = Physics2D.OverlapCircleAll(base.transform.position, 0.5f);
+            foreach(Collider2D plate in plateoverlap)
+            {
+                if(plate.name.IndexOf("Plate") != -1 && plate.transform != base.transform)
+                {
+                    this.free = false;
+                    break;
+                }
+            }
+            return;
+        }
         //base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
         base.transform.position = new Vector3(base.transform.position.x - (moveSpeed * Time.deltaTime * this.move_mult), base.transform.position.y, base.transform.position.z);
         GameManagerScript manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
@@ -90,7 +104,7 @@ public class OrderScript : MonoBehaviour
         }
         this.prev_children = base.transform.childCount;
 
-
+        OrderScript[] other = FindObjectsByType<OrderScript>(FindObjectsSortMode.None);
         //Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
         if (!this.scrub.on && ScrubScript.isHovering(base.transform))
         {
@@ -102,64 +116,48 @@ public class OrderScript : MonoBehaviour
                     this.star.SetActive(false);
                 }
             }
-            if (!this.highlight.activeSelf && this.selected <= 1)
-            {
                 this.platedisp.SetActive(true);
-                OrderScript[] other = FindObjectsByType<OrderScript>(FindObjectsSortMode.None);
-                this.selected = 0;
-                if(other.Length == 1)
+                this.selected = 1;
+                foreach (OrderScript order in other)
+                {
+                    // If not me, and is also being hovered
+                    if (order.gameObject != base.gameObject && ScrubScript.isHovering(order.transform))
+                    {
+                        if (order.transform.position.x > base.transform.position.x) // If plate is ahead of me
+                        {
+                            // Both plates are highlighted
+                            Debug.Log("Both highlighted");
+                            this.selected = 2;
+                            this.highlight.SetActive(false);
+                        }
+                        // else, I'm the superior plate
+                        break;
+                    }
+                }
+                if(this.selected == 1)
                 {
                     this.ShowPlate();
                     this.highlight.SetActive(true);
-                    this.selected = 1;
                 }
-                else
-                {
-                    foreach (OrderScript order in other)
-                    {
-                        if (order.gameObject != base.gameObject)
-                        {
-                            GameObject hl = order.transform.Find("Highlight").gameObject;
-                            if (ScrubScript.isHovering(order.transform))
-                            {
-                                // Both plates are highlighted
-                                this.selected++;
-                                if (this.platedisp.transform.Find("Qty").GetComponent<TextMeshProUGUI>().text != this.quantity.ToString())
-                                {
-                                    if (!hl.activeSelf)
-                                    {
-                                        hl.SetActive(true);
-                                        this.highlight.SetActive(false);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                hl.SetActive(false);
-                                if (!this.highlight.activeSelf)
-                                {
-                                    this.ShowPlate();
-                                    this.selected = 1;
-                                    this.highlight.SetActive(true);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
         else if(this.highlight.activeSelf)
         {
-            //Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            //if(Mathf.Abs(base.transform.position.y - mousePos.y) > 0.5f)
-            this.selected--;
-            if (this.selected == 0)
+            bool disabler = true;
+            foreach (OrderScript order in other)
+            {
+                if (ScrubScript.isHovering(order.transform))
+                {
+                    disabler = false;
+                    break;
+                }
+            }
+            if (disabler)
             {
                 this.platedisp.SetActive(false);
             }
             this.highlight.SetActive(false);
+            this.selected = 0;
         }
-
         if (this.done)
         {
             this.move_mult *= 1.05f;
@@ -281,5 +279,6 @@ public class OrderScript : MonoBehaviour
     private GameObject platedisp;
     public GameObject highlight;
     private ScrubScript scrub;
-    private int selected;
+    public int selected;
+    private bool free;
 }

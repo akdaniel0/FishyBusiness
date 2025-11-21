@@ -26,10 +26,10 @@ public class FishSpawnerScript : MonoBehaviour
         // Gold chosen otherwise (Fish 8-10)
         // Type zero yields a pufferfish
         float puffer = 1f / ((1f - GameObject.Find("Water").GetComponent<ScrubScript>().percent) * 8.5f + 1.05f); // (10% - 97%)
-        Debug.Log(Mathf.Ceil(puffer * 100f) + "%");
+        //Debug.Log(Mathf.Ceil(puffer * 100f) + "%");
         if (!order && Random.Range(0f, 1f) <= puffer)
         {
-            Debug.Log("Pufferfish spawning with " + Mathf.Ceil(puffer * 100f) + "% chance!");
+            //Debug.Log("Pufferfish spawning with " + Mathf.Ceil(puffer * 100f) + "% chance!");
             return 0;
         }
         if(order)
