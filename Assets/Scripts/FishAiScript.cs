@@ -72,7 +72,12 @@ public class FishAiScript : MonoBehaviour
         {
             isDead = true;
             fallSpeed = 0;
-            if(this.type == 0)
+            if ((base.transform.parent.name == "ConveyorA" || base.transform.parent.name == "ConveyorB") && !ScrubScript.inBounds(base.transform))
+            {
+                GameObject.Find("Manager").GetComponent<GameManagerScript>().AddMoney(-1f);
+                Destroy(base.gameObject);
+            }
+            if (this.type == 0)
             {
                 base.GetComponent<Animator>().Play("Puffer_die");
             }
@@ -84,6 +89,7 @@ public class FishAiScript : MonoBehaviour
             return;
         }
 
+        #region SwimScript
         float speed = this.speed * 0.005f;
         float ymove;
         this.checker += Time.deltaTime;
@@ -142,11 +148,12 @@ public class FishAiScript : MonoBehaviour
         if (phase == 2)
         {
             base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside + new Vector3(0f, ymove), speed);
-            if (Mathf.Abs(base.transform.position.x - this.outside.x) <= 0.5f)
+            if (!ScrubScript.inBounds(base.transform))
             {
                 Destroy(base.gameObject);
             }
         }
+        #endregion
     }
 
     private Vector3 max;

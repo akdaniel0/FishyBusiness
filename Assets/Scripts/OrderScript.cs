@@ -33,11 +33,26 @@ public class OrderScript : MonoBehaviour
         this.UpdateQuant();
         this.move_mult = 1f;
         this.platedisp = GameObject.Find("Canvas_game").transform.Find("Plate_render").gameObject;
+        this.scrub = GameObject.Find("Water").GetComponent<ScrubScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!this.free)
+        {
+            this.free = true; // Placeholder
+            Collider2D[] plateoverlap = Physics2D.OverlapCircleAll(base.transform.position, 0.5f);
+            foreach(Collider2D plate in plateoverlap)
+            {
+                if(plate.name.IndexOf("Plate") != -1 && plate.transform != base.transform)
+                {
+                    this.free = false;
+                    break;
+                }
+            }
+            return;
+        }
         //base.transform.position = Vector3.MoveTowards(base.transform.position, this.outside, 0.001f);
         base.transform.position = new Vector3(base.transform.position.x - (moveSpeed * Time.deltaTime * this.move_mult), base.transform.position.y, base.transform.position.z);
         GameManagerScript manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
@@ -48,7 +63,7 @@ public class OrderScript : MonoBehaviour
             // change moneys
             if (this.quantity > 0)
             {
-                manager.AddMoney(-1f * (this.Worth() * this.quantity));
+                manager.AddMoney(-0.5f * (this.Worth() * this.quantity));
             }
             else
             {
@@ -56,16 +71,20 @@ public class OrderScript : MonoBehaviour
             }
             Destroy(base.gameObject);
         }
-        else if (!this.half && base.transform.position.x >= -1.4f && this.fish >= 6)
+        else if (!this.half && base.transform.position.x >= -1.4f)
         {
             this.half = true;
             int rand = Random.Range(0, 3);
             if(rand <= 1)
             {
-                FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
-                float cool = Random.Range(5f, 20f);
-                Debug.Log("Help spawning...");
-                spawner.QueueFish(this.fish, cool);
+                rand = Random.Range(1, 4);
+                for (int i = 0; i < rand; i++)
+                {
+                    FishSpawnerScript spawner = FindAnyObjectByType<FishSpawnerScript>();
+                    float cool = Random.Range(5f, 20f);
+                    spawner.QueueFish(this.fish, cool);
+                }
+                Debug.Log(rand + "x Fish Help Spawning...");
             }
         }
         if (this.prev_children != base.transform.childCount)
@@ -85,11 +104,9 @@ public class OrderScript : MonoBehaviour
         }
         this.prev_children = base.transform.childCount;
 
-
-
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        OrderScript[] other = FindObjectsByType<OrderScript>(FindObjectsSortMode.None);
         //Debug.Log(Mathf.Abs(base.transform.position.y - mousePos.y));
-        if (Mathf.Abs(base.transform.position.x - mousePos.x) <= 0.5f && Mathf.Abs(base.transform.position.y - mousePos.y) <= 0.5f)
+        if (!this.scrub.on && ScrubScript.isHovering(base.transform))
         {
             if (Input.GetMouseButtonDown(1) && !this.done)
             {
@@ -99,31 +116,52 @@ public class OrderScript : MonoBehaviour
                     this.star.SetActive(false);
                 }
             }
-            if (!this.highlight.activeSelf)
-            {
                 this.platedisp.SetActive(true);
-                OrderScript[] other = GameObject.FindObjectsByType<OrderScript>(FindObjectsSortMode.None); 
-                foreach(OrderScript order in other)
+                this.selected = 1;
+                foreach (OrderScript order in other)
                 {
-                    if(order.gameObject != base.gameObject)
+                    // If not me, and is also being hovered
+                    if (order.gameObject != base.gameObject && ScrubScript.isHovering(order.transform))
                     {
-                        order.transform.Find("Highlight").gameObject.SetActive(false);
+                        if (order.transform.position.x > base.transform.position.x) // If plate is ahead of me
+                        {
+                            // Both plates are highlighted
+                            Debug.Log("Both highlighted");
+                            this.selected = 2;
+                            this.highlight.SetActive(false);
+                        }
+                        // else, I'm the superior plate
+                        break;
                     }
                 }
-                this.highlight.SetActive(true);
-                this.ShowPlate();
-            }
+                if(this.selected == 1)
+                {
+                    this.ShowPlate();
+                    this.highlight.SetActive(true);
+                }
         }
-        else if(Mathf.Abs(base.transform.position.y - mousePos.y) > 0.5f && this.platedisp.activeSelf)
+        else if(this.highlight.activeSelf)
         {
-            this.platedisp.SetActive(false);
+            bool disabler = true;
+            foreach (OrderScript order in other)
+            {
+                if (ScrubScript.isHovering(order.transform))
+                {
+                    disabler = false;
+                    break;
+                }
+            }
+            if (disabler)
+            {
+                this.platedisp.SetActive(false);
+            }
             this.highlight.SetActive(false);
+            this.selected = 0;
         }
         if (this.done)
         {
             this.move_mult *= 1.05f;
         }
-
     }
 
     private void ShowPlate()
@@ -171,7 +209,7 @@ public class OrderScript : MonoBehaviour
     {
         if (this.fish >= 9)
         {
-            return 20;
+            return 25;
         }
         else if (this.fish >= 6)
         {
@@ -227,7 +265,7 @@ public class OrderScript : MonoBehaviour
     public SpriteRenderer display;
     public float moveSpeed;
     private TextMeshPro quantity_text;
-    private int quantity;
+    public int quantity;
     private int maxquant;
     private Color semi = new Color(1f, 1f, 1f, 0.4f);
     public int holdquant = 0;
@@ -240,4 +278,7 @@ public class OrderScript : MonoBehaviour
     private bool half;
     private GameObject platedisp;
     public GameObject highlight;
+    private ScrubScript scrub;
+    public int selected;
+    private bool free;
 }

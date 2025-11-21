@@ -33,11 +33,26 @@ public class ScrubScript : MonoBehaviour
                 this.prev = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 this.check = true;
             }
-            if((this.mousePos.x >= -9f && this.mousePos.x <= 3f) && (this.mousePos.y <= 3.6f && this.mousePos.y >= 0.6f))
+            if(isHovering(base.transform))
             {
                 this.CheckMouse();
             }
         }
+    }
+
+    public static bool isHovering(Transform obj)
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        bool left = mousePos.x >= -(obj.lossyScale.x / 2f) + obj.position.x;
+        bool right = mousePos.x <= (obj.lossyScale.x / 2f) + obj.position.x;
+        bool up = mousePos.y <= (obj.lossyScale.y / 2f) + obj.position.y;
+        bool down = mousePos.y >= -(obj.lossyScale.y / 2f) + obj.position.y;
+        return left && right && up && down;
+    }
+
+    public static bool inBounds(Transform obj)
+    {
+        return obj.position.x > -10f && obj.position.x < 6f;
     }
 
     private void CheckMouse()
