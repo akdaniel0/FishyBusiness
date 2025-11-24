@@ -42,7 +42,8 @@ RenderSettings:
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 13
+  m_BakeOnSceneLoad: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -1138,6 +1139,7 @@ RectTransform:
   - {fileID: 1837996977}
   - {fileID: 5101776159631488746}
   - {fileID: 1869503589}
+  - {fileID: 994304794}
   - {fileID: 1938063041}
   - {fileID: 461314068}
   - {fileID: 1915347943}
@@ -1181,6 +1183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: {fileID: 1915347942}
+  prestigeBackground: {fileID: 0}
+  prestigeButton: {fileID: 0}
 --- !u!1 &433269264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2087,6 +2091,7 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
 --- !u!114 &655065884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,7 +2149,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 709871268}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -16.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2391,7 +2396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!50 &754918374
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2402,8 +2407,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2761,12 +2766,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766769946}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.98, y: -4.47, z: 0}
-  m_LocalScale: {x: 2, y: 2.3098516, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00142857, y: 0.03000021, z: 0}
+  m_LocalScale: {x: 0.14285713, y: 2.3098516, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 809995102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &785096802
 GameObject:
@@ -3047,7 +3052,8 @@ Transform:
   m_LocalPosition: {x: -2, y: -4.5, z: 0}
   m_LocalScale: {x: 14, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 766769949}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &809995103
@@ -3065,6 +3071,7 @@ MonoBehaviour:
   grabbedObjs: []
   conveyorSpeed: -0.08
   C_animation: {fileID: 766769947}
+  hasArrowChild: 0
 --- !u!61 &809995104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3113,7 +3120,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &809995105
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3124,8 +3131,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -3616,13 +3623,14 @@ GameObject:
   - component: {fileID: 994304794}
   - component: {fileID: 994304796}
   - component: {fileID: 994304795}
+  - component: {fileID: 994304797}
   m_Layer: 5
   m_Name: PrestigeBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &994304794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3631,7 +3639,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994304793}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 54.281685}
+  m_LocalPosition: {x: 0, y: 0, z: -44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3643,12 +3651,12 @@ RectTransform:
   - {fileID: 1317595198}
   - {fileID: 543863584}
   - {fileID: 1127646443}
-  m_Father: {fileID: 1869503589}
+  m_Father: {fileID: 377416890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -512, y: 254}
-  m_SizeDelta: {x: 339.2, y: 291.71}
+  m_AnchoredPosition: {x: -88.170044, y: 8}
+  m_SizeDelta: {x: -531.0736, y: -221.06784}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &994304795
 MonoBehaviour:
@@ -3688,6 +3696,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994304793}
   m_CullTransparentMesh: 1
+--- !u!223 &994304797
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994304793}
+  m_Enabled: 0
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
 --- !u!1 &1038869637
 GameObject:
   m_ObjectHideFlags: 0
@@ -4212,7 +4243,7 @@ Animator:
   m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &1114019987
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4223,8 +4254,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -4437,7 +4468,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142768840}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4493,9 +4524,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 994304793}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
+      - m_Target: {fileID: 994304797}
+        m_TargetAssemblyTypeName: UnityEngine.Canvas, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4646,12 +4677,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148515572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.98, y: 0.07, z: 0}
-  m_LocalScale: {x: 2, y: 2.3098516, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00142857, y: 0.07, z: 0}
+  m_LocalScale: {x: 0.14285713, y: 2.3098516, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1255063188}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1149035127
 GameObject:
@@ -4786,7 +4817,7 @@ GameObject:
   - component: {fileID: 1164376101}
   - component: {fileID: 1164376100}
   m_Layer: 5
-  m_Name: PrestigeButton
+  m_Name: PrestigeLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5291,7 +5322,8 @@ Transform:
   m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 14, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1148515575}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1255063189
@@ -5309,6 +5341,7 @@ MonoBehaviour:
   grabbedObjs: []
   conveyorSpeed: 1.5
   C_animation: {fileID: 1148515573}
+  hasArrowChild: 0
 --- !u!61 &1255063190
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5357,7 +5390,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &1255063191
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5368,8 +5401,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -5759,7 +5792,7 @@ GameObject:
   - component: {fileID: 1486520960}
   - component: {fileID: 1486520959}
   m_Layer: 5
-  m_Name: Yes
+  m_Name: YesLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6266,7 +6299,7 @@ GameObject:
   - component: {fileID: 1733992126}
   - component: {fileID: 1733992125}
   m_Layer: 5
-  m_Name: No
+  m_Name: NoLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7324,7 +7357,7 @@ GameObject:
   - component: {fileID: 1869445174}
   - component: {fileID: 1869445173}
   m_Layer: 5
-  m_Name: PrestigeMenu
+  m_Name: PrestigeMenuTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7461,7 +7494,7 @@ GameObject:
   - component: {fileID: 1869503591}
   - component: {fileID: 1869503590}
   m_Layer: 5
-  m_Name: Prestige
+  m_Name: PrestigeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7480,7 +7513,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1164376099}
-  - {fileID: 994304794}
   m_Father: {fileID: 377416890}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7531,19 +7563,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1869503591}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 994304793}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1869503591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9021,5 +9041,3 @@ SceneRoots:
   - {fileID: 377416890}
   - {fileID: 803042216}
   - {fileID: 124723047}
-  - {fileID: 1148515575}
-  - {fileID: 766769949}

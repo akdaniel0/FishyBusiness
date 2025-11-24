@@ -24,7 +24,12 @@ public class ConveyorAScript : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < grabbedObjs.Length; i++) {
-            grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (-conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
+            // remove deleted fish from array
+            if (grabbedObjs[i] == null) {
+                UnityEditor.ArrayUtility.Remove(ref grabbedObjs, grabbedObjs[i]);
+            } else {
+                grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (-conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
+            }
         }
 
         // move conveyor visual if enabled
