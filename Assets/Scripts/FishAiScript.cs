@@ -24,8 +24,10 @@ public class FishAiScript : MonoBehaviour
         this.sprite = base.GetComponent<SpriteRenderer>();
         this.lap = this.origin + new Vector3(1f, 0f);
         this.outside = this.origin - new Vector3(2f, 0f);
-        int rand = Random.Range(0, 2);
+        this.manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
         GameObject.Find("Water").GetComponent<ScrubScript>().grime++;
+        this.manager.totalfish++;
+        int rand = Random.Range(0, 2);
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
         //this.type = 0;
         if(this.type < this.types.Length)
@@ -72,10 +74,19 @@ public class FishAiScript : MonoBehaviour
         {
             isDead = true;
             fallSpeed = 0;
-            if ((base.transform.parent.name == "ConveyorA" || base.transform.parent.name == "ConveyorB") && !ScrubScript.inBounds(base.transform))
+            if (base.transform.parent.name == "ConveyorA" || base.transform.parent.name == "ConveyorB")
             {
-                GameObject.Find("Manager").GetComponent<GameManagerScript>().AddMoney(-1f);
-                Destroy(base.gameObject);
+                if(!ScrubScript.inBounds(base.transform))
+                {
+                    this.manager.AddMoney(-1f);
+                    Destroy(base.gameObject);
+                    return;
+                }
+                if(!this.caught)
+                {
+                    this.manager.fishcaught++;
+                    this.caught = true;
+                }
             }
             if (this.type == 0)
             {
@@ -91,6 +102,7 @@ public class FishAiScript : MonoBehaviour
 
         #region SwimScript
         float speed = this.speed * 0.005f;
+        speed *= Time.timeScale;
         float ymove;
         this.checker += Time.deltaTime;
         if (this.pullup)
@@ -174,4 +186,6 @@ public class FishAiScript : MonoBehaviour
     float fallSpeed;
     Vector3 mousePos;
     private float deathtime;
+    private GameManagerScript manager;
+    private bool caught;
 }

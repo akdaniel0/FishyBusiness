@@ -285,6 +285,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44627020}
   m_CullTransparentMesh: 1
+--- !u!1 &48296653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 48296655}
+  - component: {fileID: 48296654}
+  m_Layer: 0
+  m_Name: Manager
+  m_TagString: Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &48296654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48296653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ac089871547be4f85109eef0632489, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  money: 30
+  gameStartTime: 0
+  totalfish: 0
+  fishcaught: 0
+  profitIndicatorOpacity: 0
+  fadeSpeed: 100
+  profitIndicator: {fileID: 356085804}
+  prestigeBackground: {fileID: 994304793}
+  fish_text: {fileID: 1050690441}
+  money_need: {fileID: 1461134190}
+  prestigeLevel: 0
+--- !u!224 &48296655
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48296653}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.5000556}
+  m_LocalScale: {x: 6.000667, y: 6.000667, z: 6.000667}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 307.00876, y: 193.63174}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &58060887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,8 +1242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prompt: {fileID: 1915347942}
-  prestigeBackground: {fileID: 0}
-  prestigeButton: {fileID: 0}
 --- !u!1 &433269264
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,10 +2262,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 994304793}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 48296654}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
+        m_MethodName: Prestige
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3623,14 +3680,13 @@ GameObject:
   - component: {fileID: 994304794}
   - component: {fileID: 994304796}
   - component: {fileID: 994304795}
-  - component: {fileID: 994304797}
   m_Layer: 5
   m_Name: PrestigeBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &994304794
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3696,29 +3752,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994304793}
   m_CullTransparentMesh: 1
---- !u!223 &994304797
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994304793}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 25
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
 --- !u!1 &1038869637
 GameObject:
   m_ObjectHideFlags: 0
@@ -3869,7 +3902,7 @@ GameObject:
   - component: {fileID: 1050690442}
   - component: {fileID: 1050690441}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Caught_text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4524,10 +4557,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 994304797}
-        m_TargetAssemblyTypeName: UnityEngine.Canvas, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
+      - m_Target: {fileID: 48296654}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
+        m_MethodName: TogglePrestigeMenu
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5654,7 +5687,7 @@ GameObject:
   - component: {fileID: 1461134191}
   - component: {fileID: 1461134190}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: Money_need
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7563,7 +7596,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1869503591}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 48296654}
+        m_TargetAssemblyTypeName: GameManagerScript, Assembly-CSharp
+        m_MethodName: TogglePrestigeMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1869503591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7925,12 +7970,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2062004685}
-  - component: {fileID: 2062004686}
   - component: {fileID: 2062004689}
   - component: {fileID: 2062004691}
   - component: {fileID: 2062004690}
   m_Layer: 0
-  m_Name: Manager
+  m_Name: Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7956,22 +8000,6 @@ RectTransform:
   m_AnchoredPosition: {x: 367.05, y: 231.5}
   m_SizeDelta: {x: 0.49, y: 0.14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2062004686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2062004684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0ac089871547be4f85109eef0632489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  money: 30
-  gameStartTime: 0
-  profitIndicatorOpacity: 0
-  fadeSpeed: 100
 --- !u!114 &2062004689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9038,6 +9066,7 @@ SceneRoots:
   - {fileID: 2213232777521958898}
   - {fileID: 1942730574108517467}
   - {fileID: 655065885}
+  - {fileID: 48296655}
   - {fileID: 377416890}
   - {fileID: 803042216}
   - {fileID: 124723047}
