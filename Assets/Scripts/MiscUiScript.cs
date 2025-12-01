@@ -18,30 +18,13 @@ public class MiscUiScript : MonoBehaviour
         }
     }
 
-    public void Restart()
+    public static void Restart()
     {
         SceneManager.LoadScene("MainScene");
     }
 
 
     public GameObject prompt;
-    public Canvas prestigeBackground;
-    public Button prestigeButton;
-
-    void Start() {
-        // make happen when click
-        prestigeBackground = GameObject.Find("PrestigeBackground").GetComponent<Canvas>();
-        GameObject.Find("PrestigeButton").GetComponent<Button>().onClick.AddListener(togglePrestigeMenu);
-    }
-
-    // when button press, toggle Prestige Menu
-    public void togglePrestigeMenu() {
-        if (prestigeBackground.enabled) {
-            prestigeBackground.enabled = false;
-        } else {
-            prestigeBackground.enabled = true;
-        }
-    }
 
     void Update() {
         // open/close pause menu with esc
@@ -52,6 +35,15 @@ public class MiscUiScript : MonoBehaviour
             } else {
                 TogglePrompt(true);
             }
+        }
+
+        if(Input.GetKey(KeyCode.B))
+        {
+            Time.timeScale = 4f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
         }
     }
 }
