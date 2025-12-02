@@ -5,10 +5,8 @@ public class PlayPressed : MonoBehaviour
 {
     private void Start()
     {
-        {
-            gameObject.GetComponent<Button>().onClick.AddListener(PlayGame);
-            transform.parent.GetComponent<Canvas>().enabled = true;
-        }   
+        gameObject.GetComponent<Button>().onClick.AddListener(PlayGame);
+        transform.parent.GetComponent<Canvas>().enabled = true; 
     }
     public void PlayGame()
     {
