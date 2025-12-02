@@ -16,10 +16,10 @@ public class GameManagerScript : MonoBehaviour
 
     public float profitIndicatorOpacity; // default 0, reset to 255 on profit earned
     public float fadeSpeed; // opacity change rate
-    public TextMeshProUGUI profitIndicator;
-    public GameObject prestigeBackground;
-    public TextMeshProUGUI fish_text;
-    public TextMeshProUGUI money_need;
+    private TextMeshProUGUI profitIndicator;
+    private GameObject prestigeBackground;
+    private TextMeshProUGUI fish_text;
+    private TextMeshProUGUI money_need;
     public int prestigeLevel = 0;
     private int fish_needed;
     private float money_needed;
@@ -41,27 +41,39 @@ public class GameManagerScript : MonoBehaviour
     public void Prestige() // YOOOOOOOOOOOOOOOOO
     {
         this.prestigeLevel++;
+        this.money = 30f;
         this.fish_needed = (this.prestigeLevel * 25) + 10;
         this.money_needed = (this.prestigeLevel * 100f) + 100f;
         MiscUiScript.Restart();
     }
 
+    private void AssignMenus()
+    {
+        this.prestigeBackground = GameObject.Find("Canvas_game").transform.Find("PrestigeBackground").gameObject;
+        this.prestigeBackground.SetActive(true); // Done to let GameObject.Find work
+        this.profitIndicator = GameObject.Find("ProfitIndicator").GetComponent<TextMeshProUGUI>();
+        this.fish_text = GameObject.Find("Caught_text").GetComponent<TextMeshProUGUI>();
+        this.money_need = GameObject.Find("Money_need").GetComponent<TextMeshProUGUI>();
+        GameObject.Find("PrestigeButton").GetComponent<Button>().onClick.AddListener(this.TogglePrestigeMenu);
+        GameObject.Find("No").GetComponent<Button>().onClick.AddListener(this.TogglePrestigeMenu);
+        GameObject.Find("Yes").GetComponent<Button>().onClick.AddListener(this.Prestige);
+        this.prestigeBackground.SetActive(false);
+    }
 
     void Start()
     {
         if (GameObject.FindGameObjectsWithTag("Manager").Length == 1)
         {
             Debug.Log("No destroy!");
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(base.gameObject);
         }
         else
         {
-            Destroy(this);
+            Destroy(base.gameObject);
             return;
         }
         //sidepanel = GameObject.Find("Canvas").GetComponent<SidePanelScript>();
         // define child object/component for profitIndicator
-        profitIndicator = GameObject.Find("ProfitIndicator").GetComponent<TextMeshProUGUI>();
         this.fish_needed = (this.prestigeLevel * 25) + 10;
         this.money_needed = (this.prestigeLevel * 100f) + 100f;
     }
@@ -77,6 +89,11 @@ public class GameManagerScript : MonoBehaviour
         // update display rounded to tenth place
         GameObject.Find("Total").GetComponent<TextMeshProUGUI>().text = ("$" + Mathf.Round(money * 10f) / 10f);
 
+        if(this.profitIndicator == null)
+        {
+            this.AssignMenus();
+        }
+
         // set floor for opacity
         if (profitIndicatorOpacity < 0) {
             profitIndicatorOpacity = 0;
@@ -86,6 +103,7 @@ public class GameManagerScript : MonoBehaviour
             profitIndicatorOpacity -= Time.deltaTime * fadeSpeed;
         }
 
+        
         // update opacity
         profitIndicator.color = new Color32((byte)profitIndicatorRed, (byte)profitIndicatorGreen, (byte)profitIndicator.color.b, (byte)profitIndicatorOpacity);
     }
