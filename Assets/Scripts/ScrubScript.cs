@@ -18,6 +18,7 @@ public class ScrubScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(GameObject.Find("Canvas").GetComponent<Canvas>().enabled) { this.grime = 0f;  return; }
         this.grime = Mathf.Clamp(this.grime, 0f, 500f);
         this.percent = this.grime / 500f;
         this.water.color = this.bluwater + (this.diff * this.percent);
@@ -53,6 +54,11 @@ public class ScrubScript : MonoBehaviour
     public static bool inBounds(Transform obj)
     {
         return obj.position.x > -10f && obj.position.x < 6f;
+    }
+
+    public static bool inBounds(Transform obj, float left, float right)
+    {
+        return obj.position.x > left && obj.position.x < right;
     }
 
     private void CheckMouse()

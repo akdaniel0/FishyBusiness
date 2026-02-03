@@ -110,7 +110,7 @@ MonoBehaviour:
   sprites:
   - {fileID: -2510476293373519475, guid: f11e3b38508d43b469045b2a11c35277, type: 3}
   - {fileID: -3493396433182265426, guid: a54e33e4852ca3d4f9c2ff56f34505d4, type: 3}
-  - {fileID: -437355665260722552, guid: f888a0cf288aa3b4f893f741ed4ec7f5, type: 3}
+  - {fileID: 4182291776415479046, guid: 5d6993df73ef31840b2df1005f84090a, type: 3}
   - {fileID: -6888756438569675735, guid: b6ab935fb3532fa448a397dcb979a96a, type: 3}
   - {fileID: 323113867243170533, guid: 2f2228eb446a8d54db2bb083a7e0c295, type: 3}
   - {fileID: -8781757214100938709, guid: b6df869434a1aba428c502f1e5ccbb48, type: 3}
@@ -121,10 +121,12 @@ MonoBehaviour:
   - {fileID: 1817631445932555628, guid: 2f52750aa0ffc9b42b964c3948d6c0db, type: 3}
   display: {fileID: 1323550479990113331}
   moveSpeed: 0
+  quantity: 0
   holdquant: 0
   fishAis: []
   star: {fileID: 4281835505236653298}
   highlight: {fileID: 5774972590817765518}
+  selected: 0
 --- !u!61 &2363757947715922025
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -173,7 +175,7 @@ BoxCollider2D:
   m_EdgeRadius: 0
 --- !u!50 &6500490310270010470
 Rigidbody2D:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -184,8 +186,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
