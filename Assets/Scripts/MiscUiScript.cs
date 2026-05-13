@@ -21,6 +21,7 @@ public class MiscUiScript : MonoBehaviour
     public static void Restart()
     {
         SceneManager.LoadScene("MainScene");
+
     }
 
 
@@ -37,13 +38,17 @@ public class MiscUiScript : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.B))
+        if(Input.GetKey(KeyCode.B) && !this.fast_forward)
         {
             Time.timeScale = 4f;
+            this.fast_forward = true;
         }
-        else
+        else if(this.fast_forward)
         {
             Time.timeScale = 1f;
+            this.fast_forward = false;
         }
     }
+
+    private bool fast_forward;
 }
