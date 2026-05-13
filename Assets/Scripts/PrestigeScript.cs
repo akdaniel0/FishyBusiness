@@ -53,11 +53,15 @@ public class PrestigeScript : MonoBehaviour
     {   
         gameManagerScript.money = 30;   
         currentMultiplier += addMulti;
+        completeCon = false;
+        orderConBOOL = false;
+        moneyConBOOL = false;
     }
 
     public void Go()
     {
         if (completeCon)
             MoneyMulti();
+
     }
 }
