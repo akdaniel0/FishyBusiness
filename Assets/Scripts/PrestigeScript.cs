@@ -21,6 +21,7 @@ public class PrestigeScript : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private GameManagerScript gameManagerScript;
+    [SerializeField] private SidePanelScript sidePanelScript;
 
 
 
@@ -30,6 +31,9 @@ public class PrestigeScript : MonoBehaviour
         completeCon = false;
         orderConBOOL = false;
         moneyConBOOL = false;
+        sidePanelScript.doUpgrade1();
+        sidePanelScript.doUpgrade2();
+        sidePanelScript.doUpgrade3();
     }
 
     // Update is called once per frame

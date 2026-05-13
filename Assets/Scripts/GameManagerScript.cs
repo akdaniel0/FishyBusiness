@@ -26,7 +26,7 @@ public class GameManagerScript : MonoBehaviour
     void Update()
     {
         // debug test
-        if (Input.GetKeyDown(KeyCode.K)) {
+        if (Input.GetKeyDown(KeyCode.K) || Input.GetKey(KeyCode.Tab)) {
             AddMoney(5);
         }
 
