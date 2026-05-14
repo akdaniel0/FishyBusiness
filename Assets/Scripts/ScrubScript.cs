@@ -63,7 +63,7 @@ public class ScrubScript : MonoBehaviour
 
     private void CheckMouse()
     {
-        float diff = (Mathf.Abs(prev.x - mousePos.x) + Mathf.Abs(prev.y - mousePos.y)) * 0.25f;
+        float diff = (Mathf.Abs(prev.x - mousePos.x) + Mathf.Abs(prev.y - mousePos.y)) * 1f;
         this.grime -= diff;
     }
 
