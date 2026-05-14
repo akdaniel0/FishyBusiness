@@ -81,11 +81,12 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR
         // debug test
         if (Input.GetKeyDown(KeyCode.K)) {
             AddMoney(5);
         }
-
+#endif
         // update display rounded to tenth place
         GameObject.Find("Total").GetComponent<TextMeshProUGUI>().text = ("$" + Mathf.Round(money * 10f) / 10f);
 

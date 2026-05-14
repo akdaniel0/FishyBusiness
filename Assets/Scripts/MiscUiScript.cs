@@ -29,7 +29,7 @@ public class MiscUiScript : MonoBehaviour
 
     void Update() {
         // open/close pause menu with esc
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameObject.Find("Canvas").GetComponent<Canvas>().enabled) {
             // check if menu and make it not what it is
             if (Time.timeScale == 0f) {
                 TogglePrompt(false);
@@ -38,7 +38,7 @@ public class MiscUiScript : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.B) && !this.fast_forward)
+        if(Input.GetKey(KeyCode.B))
         {
             Time.timeScale = 4f;
             this.fast_forward = true;

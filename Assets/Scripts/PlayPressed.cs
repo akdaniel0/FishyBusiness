@@ -7,7 +7,7 @@ public class PlayPressed : MonoBehaviour
     private void Start()
     {
         gameObject.GetComponent<Button>().onClick.AddListener(PlayGame);
-        transform.parent.GetComponent<Canvas>().enabled = true;
+        transform.parent.GetComponentInParent<Canvas>().enabled = true;
         if(FindAnyObjectByType<GameManagerScript>().prestigeLevel > 0)
         {
             GameObject.Find("PlayTxt").GetComponent<TextMeshProUGUI>().text = "Prestige Onwards!";
@@ -15,7 +15,7 @@ public class PlayPressed : MonoBehaviour
     }
     public void PlayGame()
     {
-        GameObject.Find("Manager").GetComponent<GameManagerScript>().gameStartTime = Time.time;
-        transform.parent.GetComponent<Canvas>().enabled = false;
+        GameObject.Find("Manager").GetComponentInParent<GameManagerScript>().gameStartTime = Time.time;
+        transform.parent.GetComponentInParent<Canvas>().enabled = false;
     }
 }
