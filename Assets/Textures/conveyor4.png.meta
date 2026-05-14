@@ -164,6 +164,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
     nameFileIdTable:
       conveyor4_0: -5869057299307999057
   mipmapLimitGroupName: 
