@@ -3774,7 +3774,7 @@ MonoBehaviour:
   conveyorSpeed: -0.08
   C_animation: {fileID: 0}
   hasArrowChild: 1
-  bounds: 0.879
+  bounds: 2.95
 --- !u!61 &809995104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5993,7 +5993,7 @@ MonoBehaviour:
   conveyorSpeed: 1.5
   C_animation: {fileID: 0}
   hasArrowChild: 1
-  bounds: -0.882
+  bounds: -2.95
 --- !u!61 &1255063190
 BoxCollider2D:
   m_ObjectHideFlags: 0
