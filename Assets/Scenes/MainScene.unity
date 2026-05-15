@@ -2995,7 +2995,7 @@ GameObject:
   - component: {fileID: 754918375}
   m_Layer: 0
   m_Name: FishTankCraneGrabber
-  m_TagString: Untagged
+  m_TagString: Grabber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 1114019985}
   m_Layer: 0
   m_Name: ConveyorCraneGrabber
-  m_TagString: Untagged
+  m_TagString: Grabber
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

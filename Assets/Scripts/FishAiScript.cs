@@ -25,7 +25,8 @@ public class FishAiScript : MonoBehaviour
         this.lap = this.origin + new Vector3(1f, 0f);
         this.outside = this.origin - new Vector3(2f, 0f);
         this.manager = GameObject.Find("Manager").GetComponent<GameManagerScript>();
-        GameObject.Find("Water").GetComponent<ScrubScript>().grime++;
+        scrubScript = GameObject.Find("Water").GetComponent<ScrubScript>();
+        scrubScript.grime++;
         this.manager.totalfish++;
         int rand = Random.Range(0, 2);
         if (rand == 0) { this.pullup = false; } else { this.pullup = true; }
@@ -99,6 +100,16 @@ public class FishAiScript : MonoBehaviour
             transform.position = new Vector3(transform.position.x, transform.position.y - fallSpeed * Time.deltaTime, transform.position.z);
             fallSpeed += 2 * Time.deltaTime;
             return;
+        }
+        
+        // mutate fish type when grime
+        if (type != 0 && Random.Range(100f, 100000f) < scrubScript.grime) {
+            type = Random.Range(0,11);
+            Debug.Log("fis type mutated");
+            if(this.type < this.types.Length)
+            {
+                base.GetComponent<Animator>().runtimeAnimatorController = this.types[this.type];
+            }
         }
 
         #region SwimScript
@@ -189,4 +200,5 @@ public class FishAiScript : MonoBehaviour
     private float deathtime;
     private GameManagerScript manager;
     private bool caught;
+    ScrubScript scrubScript;
 }

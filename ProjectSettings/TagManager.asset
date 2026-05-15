@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Fish
   - Manager
+  - Grabber
   layers:
   - Default
   - TransparentFX
