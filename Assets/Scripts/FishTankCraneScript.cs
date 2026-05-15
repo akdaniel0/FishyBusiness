@@ -104,6 +104,11 @@ public class FishTankCraneScript : MonoBehaviour
         } else if (ypos < xyLimits[2]) {
             ypos = xyLimits[2] + 0.1f;
         }
+        craneVelocity *= Time.deltaTime * 120f;
+        
+        craneVelocity.x = Mathf.Clamp(craneVelocity.x, -100f, 100f);
+        craneVelocity.y = Mathf.Clamp(craneVelocity.y, -100f, 100f);
+        
         //Debug.Log("cv: " + craneVelocity);
         //Debug.Log("ydist: " + ydist);
         
