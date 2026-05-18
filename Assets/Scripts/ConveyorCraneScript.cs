@@ -51,6 +51,13 @@ public class ConveyorCraneScript : MonoBehaviour
         gameObject.GetComponent<LineRenderer>().SetPosition(0, new Vector3(transform.GetChild(1).transform.position.x, transform.GetChild(1).transform.position.y, 5));
         gameObject.GetComponent<LineRenderer>().SetPosition(1, new Vector3(transform.position.x, transform.position.y, 5));
 
+        
+    }
+
+    // FixedUpdate is called on a fixed interval, physics done here
+    void FixedUpdate() {
+        
+        // no crane control when scrub mode
         if (GameObject.Find("Water").GetComponent<ScrubScript>().on) { return; }
 
         float xpos = transform.localPosition.x;
@@ -121,5 +128,6 @@ public class ConveyorCraneScript : MonoBehaviour
         transform.localPosition = new Vector3(xpos, transform.localPosition.y, transform.localPosition.z);
         // grabber vertical position
         //transform.GetChild(0).localPosition = new Vector3(transform.GetChild(0).localPosition.x, ypos, transform.GetChild(0).localPosition.z);
+
     }
 }

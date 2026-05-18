@@ -103,14 +103,14 @@ public class FishAiScript : MonoBehaviour
         }
         
         // mutate fish type when grime
-        if ((type != 0 || type != 5) && Random.Range(100f, 100000f) < scrubScript.grime) {
+        /*if ((type != 0 || type != 5) && Random.Range(100f, 100000f) < scrubScript.grime) {
             type = Random.Range(0,11);
             Debug.Log("fis type mutated");
             if(this.type < this.types.Length)
             {
                 base.GetComponent<Animator>().runtimeAnimatorController = this.types[this.type];
             }
-        }
+        }*/
 
         #region SwimScript
         float speed = this.speed * 0.005f;

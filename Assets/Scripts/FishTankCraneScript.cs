@@ -54,7 +54,25 @@ public class FishTankCraneScript : MonoBehaviour
             }
         }
 
+        
+
+        
+        // drop animation when grab puffer
+        if (grabbedObj != null && grabbedObj.GetComponent<FishAiScript>().type == 0) {
+            gameObject.GetComponentInChildren<Animator>().Play("ReleaseAnim");
+        }
+    
+    }
+
+    // FixedUpdate is called on a fixed interval, physics done here
+    void FixedUpdate() {
+        
+        // no crane control when scrub mode
         if (GameObject.Find("Water").GetComponent<ScrubScript>().on) { return; }
+
+        float xpos = transform.localPosition.x;
+        float ypos = transform.GetChild(0).localPosition.y;
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // enable crane movement when above limit
         if (mousePos.y > 0.5f && Input.GetKey(KeyCode.C)) {
@@ -121,10 +139,6 @@ public class FishTankCraneScript : MonoBehaviour
         // grabber vertical position
         transform.GetChild(0).localPosition = new Vector3(transform.GetChild(0).localPosition.x, ypos, transform.GetChild(0).localPosition.z);
 
-        // drop animation when grab puffer
-        if (grabbedObj != null && grabbedObj.GetComponent<FishAiScript>().type == 0) {
-            gameObject.GetComponentInChildren<Animator>().Play("ReleaseAnim");
-        }
-    
+
     }
 }

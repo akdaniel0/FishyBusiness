@@ -53,7 +53,7 @@ public class SidePanelScript : MonoBehaviour
         }
     }
     
-    // attempt to buy upgrade
+    // attempt to buy upgrade // should probably be capped at 15f
     void doUpgrade2() {
         if (manager.money >= upgradeCosts[1]) {
             GameObject.Find("FishTankCraneCenter").GetComponent<FishTankCraneScript>().verticalSpeed *= 1.25f;

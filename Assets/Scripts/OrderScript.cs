@@ -228,7 +228,7 @@ public class OrderScript : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Fish") && !collision.transform.parent.CompareTag("Grabber") && !collision.transform.parent.CompareTag("Plate"))
+        if (collision.CompareTag("Fish") && !collision.transform.parent.CompareTag("Grabber") && !collision.transform.parent.CompareTag("Plate") && !this.done)
         {
             collision.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
             collision.transform.parent = base.transform;
