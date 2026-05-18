@@ -114,6 +114,7 @@ public class OrderScript : MonoBehaviour
                 {
                     this.done = true;
                     this.star.SetActive(false);
+                    this.GetComponent<Collider2D>().enabled = false;
                 }
             }
                 this.platedisp.SetActive(true);
@@ -234,6 +235,8 @@ public class OrderScript : MonoBehaviour
             collision.transform.localPosition = this.holdpos + new Vector3(0f, 0.1f * this.holdquant);
             collision.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
             collision.GetComponent<SpriteRenderer>().flipX = false;
+            // remove fish from conveyor
+            UnityEditor.ArrayUtility.Remove(ref GameObject.Find("ConveyorB").GetComponent<ConveyorAScript>().grabbedObjs, collision.gameObject);
         }
         else if (collision.transform.name == "ConveyorB")
         {

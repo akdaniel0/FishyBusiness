@@ -65,8 +65,6 @@ public class FishTankCraneScript : MonoBehaviour
             xdist = 0;
             ydist = 0;
         }
-        // apply drag to crane velocity
-        craneVelocity /= (1f + Time.deltaTime * craneDrag);
 
         if(isReaching && ypos > xyLimits[2]) {
             ydist = -0.5f * verticalSpeed;
@@ -104,12 +102,15 @@ public class FishTankCraneScript : MonoBehaviour
         } else if (ypos < xyLimits[2]) {
             ypos = xyLimits[2] + 0.1f;
         }
-        craneVelocity *= Time.deltaTime * 120f;
+        // apply drag to crane velocity
+        craneVelocity /= (1f + Time.deltaTime * craneDrag);
+        // scale crane velocity with gamespeed
+        //craneVelocity *= Time.deltaTime * 120f;
+        //Debug.Log("dt:" + Time.deltaTime + " cv: " + craneVelocity + " drag: + " +   Time.deltaTime * craneDrag);
         
-        craneVelocity.x = Mathf.Clamp(craneVelocity.x, -100f, 100f);
-        craneVelocity.y = Mathf.Clamp(craneVelocity.y, -100f, 100f);
+        craneVelocity.x = Mathf.Clamp(craneVelocity.x, -1000f, 1000f);
+        craneVelocity.y = Mathf.Clamp(craneVelocity.y, -1000f, 1000f);
         
-        //Debug.Log("cv: " + craneVelocity);
         //Debug.Log("ydist: " + ydist);
         
         // apply position offset from velocity to position
