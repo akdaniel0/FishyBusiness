@@ -32,8 +32,8 @@ public class ConveyorGrabberScript : MonoBehaviour
 
             // remove obj from conveyor
             if (collision.transform.parent != null) {
-                UnityEditor.ArrayUtility.Remove(ref GameObject.Find("ConveyorA").GetComponent<ConveyorAScript>().grabbedObjs, collision.gameObject);
-                UnityEditor.ArrayUtility.Remove(ref GameObject.Find("ConveyorB").GetComponent<ConveyorAScript>().grabbedObjs, collision.gameObject);
+                GameObject.Find("ConveyorA").GetComponent<ConveyorAScript>().grabbedObjs.Remove(collision.gameObject);
+                GameObject.Find("ConveyorB").GetComponent<ConveyorAScript>().grabbedObjs.Remove(collision.gameObject);
             }
             
             craneScript.grabbedObj = collision.gameObject;

@@ -236,7 +236,7 @@ public class OrderScript : MonoBehaviour
             collision.transform.localScale = new Vector3(0.4f, 0.4f, 1f);
             collision.GetComponent<SpriteRenderer>().flipX = false;
             // remove fish from conveyor
-            UnityEditor.ArrayUtility.Remove(ref GameObject.Find("ConveyorB").GetComponent<ConveyorAScript>().grabbedObjs, collision.gameObject);
+            GameObject.Find("ConveyorB").GetComponent<ConveyorAScript>().grabbedObjs.Remove(collision.gameObject);
         }
         else if (collision.transform.name == "ConveyorB")
         {

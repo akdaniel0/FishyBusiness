@@ -1,8 +1,10 @@
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ConveyorAScript : MonoBehaviour
 {
-    public GameObject[] grabbedObjs;
+    public List<GameObject> grabbedObjs;
     GameObject arrowVisual;
 
     public float conveyorSpeed;
@@ -14,7 +16,7 @@ public class ConveyorAScript : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        grabbedObjs = new GameObject[0];
+        grabbedObjs = new List<GameObject>();
         //C_animation.speed = Mathf.Abs(conveyorSpeed) * 1.95f;
         
         if (hasArrowChild) {
@@ -27,10 +29,10 @@ public class ConveyorAScript : MonoBehaviour
     void Update()
     {
         if(GameObject.Find("Canvas").GetComponent<Canvas>().enabled) { return; }
-        for (int i = 0; i < grabbedObjs.Length; i++) {
+        for (int i = 0; i < grabbedObjs.Count; i++) {
             // remove deleted fish from array
             if (grabbedObjs[i] == null) {
-                UnityEditor.ArrayUtility.Remove(ref grabbedObjs, grabbedObjs[i]);
+                this.grabbedObjs.Remove(grabbedObjs[i]);
             } else {
                 grabbedObjs[i].transform.position = new Vector3(grabbedObjs[i].transform.position.x + (-conveyorSpeed * Time.deltaTime), grabbedObjs[i].transform.position.y, grabbedObjs[i].transform.position.z);
             }
@@ -52,9 +54,9 @@ public class ConveyorAScript : MonoBehaviour
     // detect collisions
     void OnTriggerStay2D(Collider2D collision) {
         // if fish and not had, get
-        if (collision.gameObject.tag == "Fish" && !UnityEditor.ArrayUtility.Contains<GameObject>(grabbedObjs, collision.gameObject) && collision.transform.parent == null) {
+        if (collision.gameObject.tag == "Fish" && !this.grabbedObjs.Contains(collision.gameObject) && collision.transform.parent == null) {
             // grab fish
-            UnityEditor.ArrayUtility.Add(ref grabbedObjs, collision.gameObject);
+            this.grabbedObjs.Add(collision.gameObject);
             collision.transform.SetParent(transform);
             
         }
