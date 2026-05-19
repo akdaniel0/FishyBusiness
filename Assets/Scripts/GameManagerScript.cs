@@ -42,7 +42,8 @@ public class GameManagerScript : MonoBehaviour
     {
         this.prestigeLevel++;
         this.money = 30f;
-        this.fish_needed = (this.prestigeLevel * 25) + 10;
+        this.fishcaught = 0;
+        this.fish_needed = (this.prestigeLevel * 5) + 10;
         this.money_needed = (this.prestigeLevel * 100f) + 100f;
         MiscUiScript.Restart();
     }
