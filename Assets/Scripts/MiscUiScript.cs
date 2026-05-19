@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.Events;
 
 public class MiscUiScript : MonoBehaviour
 { 
+    // Toggles pause menu
     public void TogglePrompt(bool status)
     {
         this.prompt.SetActive(status);
@@ -21,7 +20,7 @@ public class MiscUiScript : MonoBehaviour
     public static void Restart()
     {
         SceneManager.LoadScene("MainScene");
-
+        Time.timeScale = 1f;
     }
 
 
@@ -42,13 +41,17 @@ public class MiscUiScript : MonoBehaviour
         {
             Time.timeScale = 4f;
             this.fast_forward = true;
+            this.ff_obj.SetActive(true);
+
         }
         else if(this.fast_forward)
         {
             Time.timeScale = 1f;
             this.fast_forward = false;
+            this.ff_obj.SetActive(false);
         }
     }
 
     private bool fast_forward;
+    private GameObject ff_obj => GameObject.Find("Canvas_game").transform.Find("Fast Forward").gameObject;
 }

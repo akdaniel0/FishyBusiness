@@ -9,6 +9,8 @@ public class GameManagerScript : MonoBehaviour
     public int totalfish;
     public int fishcaught;
 
+    private float multiplier;
+
     float profitIndicatorGreen;
     float profitIndicatorRed;
     //public SidePanelScript sidepanel;
@@ -33,8 +35,8 @@ public class GameManagerScript : MonoBehaviour
         {
             Button yes = this.prestigeBackground.transform.Find("Yes").GetComponent<Button>();
             yes.interactable = (this.money >= this.money_needed) && (this.fishcaught >= this.fish_needed);
-            this.fish_text.text = this.fishcaught + " / " + this.fish_needed;
-            this.money_need.text = this.money + " / " + this.money_needed;
+            this.fish_text.text = "<color=" + (this.fishcaught >= this.fish_needed ? "green" : "red") + ">" + this.fishcaught + "</color> / " + this.fish_needed;
+            this.money_need.text = "<color=" + (this.money >= this.money_needed ? "green" : "red") + ">" + this.money + "</color> / " + this.money_needed;
         }
     }
     
@@ -59,6 +61,8 @@ public class GameManagerScript : MonoBehaviour
         GameObject.Find("No").GetComponent<Button>().onClick.AddListener(this.TogglePrestigeMenu);
         GameObject.Find("Yes").GetComponent<Button>().onClick.AddListener(this.Prestige);
         this.prestigeBackground.SetActive(false);
+        this.multiplier = Mathf.Pow(1.1f, this.prestigeLevel);
+        GameObject.Find("MultiplierVisualizer").GetComponent<TextMeshProUGUI>().text = "x(" + $"{multiplier:F2}" + ")";
     }
 
     void Start()
@@ -116,7 +120,7 @@ public class GameManagerScript : MonoBehaviour
         if(moneyAdded > 0f)
         {
             // If money is being added, multiply it by the multiplier (10%)
-            moneyAdded *= Mathf.Pow(1.1f, this.prestigeLevel);
+            moneyAdded *= this.multiplier;
         }
         money += moneyAdded;
         profitIndicator.text = moneyAdded.ToString();
