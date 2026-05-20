@@ -26,6 +26,9 @@ public class GameManagerScript : MonoBehaviour
     private int fish_needed;
     private float money_needed;
 
+    private Slider debt_warn => GameObject.Find("Canvas_game").transform.Find("Debt_slider").GetComponent<Slider>();
+    private float debt_timer;
+
 
     // when button press, toggle Prestige Menu
     public void TogglePrestigeMenu()
@@ -39,17 +42,21 @@ public class GameManagerScript : MonoBehaviour
             this.money_need.text = "<color=" + (this.money >= this.money_needed ? "green" : "red") + ">" + this.money + "</color> / " + this.money_needed;
         }
     }
-    
+
+    public void ResetValues()
+    {
+        this.prestigeLevel = 0;
+    }
+
     public void Prestige() // YOOOOOOOOOOOOOOOOO
     {
         this.prestigeLevel++;
-        this.money = 30f;
-        this.fishcaught = 0;
         this.fish_needed = (this.prestigeLevel * 5) + 10;
         this.money_needed = (this.prestigeLevel * 100f) + 100f;
         MiscUiScript.Restart();
     }
 
+    // Upon Restart
     private void AssignMenus()
     {
         this.prestigeBackground = GameObject.Find("Canvas_game").transform.Find("PrestigeBackground").gameObject;
@@ -57,6 +64,8 @@ public class GameManagerScript : MonoBehaviour
         this.profitIndicator = GameObject.Find("ProfitIndicator").GetComponent<TextMeshProUGUI>();
         this.fish_text = GameObject.Find("Caught_text").GetComponent<TextMeshProUGUI>();
         this.money_need = GameObject.Find("Money_need").GetComponent<TextMeshProUGUI>();
+        this.money = 30f;
+        this.fishcaught = 0;
         GameObject.Find("PrestigeButton").GetComponent<Button>().onClick.AddListener(this.TogglePrestigeMenu);
         GameObject.Find("No").GetComponent<Button>().onClick.AddListener(this.TogglePrestigeMenu);
         GameObject.Find("Yes").GetComponent<Button>().onClick.AddListener(this.Prestige);
@@ -86,6 +95,11 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale == 0f)
+        {
+            return;
+        }
+
 #if UNITY_EDITOR
         // debug test
         if (Input.GetKeyDown(KeyCode.K)) {
@@ -100,8 +114,35 @@ public class GameManagerScript : MonoBehaviour
             this.AssignMenus();
         }
 
+        if(money < 0f)
+        {
+            if(!this.debt_warn.gameObject.activeSelf)
+            {
+                this.debt_warn.gameObject.SetActive(true);
+                this.debt_timer = 30f;
+                this.debt_warn.maxValue = this.debt_timer;
+                this.debt_warn.value = this.debt_warn.maxValue;
+            }
+
+            this.debt_timer -= Time.deltaTime;
+            this.debt_warn.value = this.debt_timer;
+            this.debt_warn.transform.Find("Debt_seconds").GetComponent<TextMeshProUGUI>().text = $"{this.debt_timer:F1}" + "s";
+
+            if(this.debt_timer <= 0f)
+            {
+                GameObject.Find("Canvas_game").transform.Find("LoseScreen").gameObject.SetActive(true);
+                Time.timeScale = 0f;
+                GameObject.Find("Prestige_stat").GetComponent<TextMeshProUGUI>().text = "Prestige Level: " + this.prestigeLevel;
+            }
+        }
+        else if(this.debt_warn.gameObject.activeSelf)
+        {
+            this.debt_warn.gameObject.SetActive(false);
+        }
+
         // set floor for opacity
-        if (profitIndicatorOpacity < 0) {
+        if (profitIndicatorOpacity < 0)
+        {
             profitIndicatorOpacity = 0;
         }
         // fade out indicator by decreasing opacity by fadeSpeed

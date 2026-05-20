@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,10 +18,14 @@ public class MiscUiScript : MonoBehaviour
         }
     }
 
-    public static void Restart()
+    public static void Restart(bool reset = false)
     {
-        SceneManager.LoadScene("MainScene");
+        if (reset)
+        {
+            FindAnyObjectByType<GameManagerScript>().ResetValues();
+        }
         Time.timeScale = 1f;
+        SceneManager.LoadScene("MainScene");
     }
 
 
@@ -28,7 +33,8 @@ public class MiscUiScript : MonoBehaviour
 
     void Update() {
         // open/close pause menu with esc
-        if (Input.GetKeyDown(KeyCode.Escape) && !GameObject.Find("Canvas").GetComponent<Canvas>().enabled) {
+        if (Input.GetKeyDown(KeyCode.Escape) && !GameObject.Find("Canvas").GetComponent<Canvas>().enabled
+            && !this.lose_screen.activeSelf) {
             // check if menu and make it not what it is
             if (Time.timeScale == 0f) {
                 TogglePrompt(false);
@@ -37,12 +43,12 @@ public class MiscUiScript : MonoBehaviour
             }
         }
 
-        if(Input.GetKey(KeyCode.B))
+
+        if(Input.GetKey(KeyCode.B) && Time.timeScale > 0f)
         {
             Time.timeScale = 4f;
             this.fast_forward = true;
             this.ff_obj.SetActive(true);
-
         }
         else if(this.fast_forward)
         {
@@ -54,4 +60,6 @@ public class MiscUiScript : MonoBehaviour
 
     private bool fast_forward;
     private GameObject ff_obj => GameObject.Find("Canvas_game").transform.Find("Fast Forward").gameObject;
+
+    private GameObject lose_screen => GameObject.Find("Canvas_game").transform.Find("LoseScreen").gameObject;
 }

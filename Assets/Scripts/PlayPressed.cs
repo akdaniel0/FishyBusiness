@@ -17,5 +17,11 @@ public class PlayPressed : MonoBehaviour
     {
         GameObject.Find("Manager").GetComponentInParent<GameManagerScript>().gameStartTime = Time.time;
         transform.parent.GetComponentInParent<Canvas>().enabled = false;
+        Time.timeScale = 1f;
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }
